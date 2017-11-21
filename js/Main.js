@@ -128,6 +128,14 @@ function addAllKursiMahasiswa() {
     }
 }
 
+function addAllWhiteBoard() {
+    var i,x=-6;
+    for(i=0 ; i<2 ; i++) {
+        addWhiteBoard(x);
+        x+=12.3;
+    }
+}
+
 function addKursiMahasiswa(x,z) {
     var loader = new THREE.JSONLoader();
     var callbackKursiMahasiswa = function( geometry ) {
@@ -146,9 +154,7 @@ function addMejaDosen() {
         var texture = new THREE.TextureLoader().load( "models/texturemejadosen.jpg" );
         var material = new THREE.MeshBasicMaterial( { map : texture } ); 
         var mesh = new THREE.Mesh( geometry, material );
-        mesh.position.x = 15;
-        mesh.position.z = -10;
-        mesh.position.y = 4.7;
+        mesh.position.set(8,4.7,-8)
         mesh.rotation.y = (Math.PI/2) + (Math.PI);
         mesh.scale.set(2,2,2);
         scene.add( mesh );
@@ -156,15 +162,13 @@ function addMejaDosen() {
     loader.load( "models/mejadosen.json", callbackMejaDosen);
 }
 
-function addWhiteBoard() {
+function addWhiteBoard(x) {
     var loader = new THREE.JSONLoader();
     var callbackWhiteBoard = function( geometry ) {
         var texture = new THREE.TextureLoader().load( "models/texturepapantulis.jpg" );
         var material = new THREE.MeshBasicMaterial( { map : texture } ); 
         var mesh = new THREE.Mesh( geometry, material );
-        // mesh.position.x = 15;
-        mesh.position.z = -12;
-        mesh.position.y = 10;
+        mesh.position.set(x,10,-12);
         // mesh.rotation.y = (Math.PI/2) + (Math.PI);
         mesh.scale.set(3.5,3.5,3.5);
         scene.add( mesh );
@@ -174,18 +178,14 @@ function addWhiteBoard() {
 
 function addClock() {
     var loader = new THREE.JSONLoader();
-    var callbackWhiteBoard = function( geometry ) {
-        var texture = new THREE.TextureLoader().load( "models/texturepapantulis.jpg" );
+    var callbackClock = function( geometry ) {
+        var texture = new THREE.TextureLoader().load( "models/texturejamdinding.jpg" );
         var material = new THREE.MeshBasicMaterial( { map : texture } ); 
         var mesh = new THREE.Mesh( geometry, material );
-        // mesh.position.x = 15;
-        mesh.position.z = -12;
-        mesh.position.y = 10;
-        // mesh.rotation.y = (Math.PI/2) + (Math.PI);
-        mesh.scale.set(3.5,3.5,3.5);
+        mesh.position.set(2.7,14,-15.2)
         scene.add( mesh );
         };
-    loader.load( "models/papantulis.json", callbackWhiteBoard);
+    loader.load( "models/jamdinding.json", callbackClock);
 }
 
 function createRoom() {
@@ -212,7 +212,8 @@ function init() {
     createRoom();
     addAllKursiMahasiswa();
     addMejaDosen();
-    addWhiteBoard();
+    addAllWhiteBoard();
+    addClock();
 }
 
 init();
