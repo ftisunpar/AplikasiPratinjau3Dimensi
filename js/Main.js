@@ -93,13 +93,13 @@ scene.add(light1);
 
 
 
-function addAllKursiMahasiswa() {
+function addAllStudentChair() {
     //sisi kanan
     //kursi pertama ada di tengah, loopingnya ke kanan
     var i,j,k,l,x=1.5,z=0; // x = 1.5 karena gamau mulai dari tengah 
     for(i=0 ; i<7 ; i++) {
         for(j=0 ; j<4 ; j++) {
-            addKursiMahasiswa(x,z);
+            addStudentChair(x,z);
             z+=3.5;
         }
         x += 3;
@@ -111,7 +111,7 @@ function addAllKursiMahasiswa() {
     x = -4.5; // gap antara kursi-kursi di sisi kanan dan kiri
     for(i=0 ; i<6 ; i++) {
         for(j=0 ; j<4 ; j++) {
-            addKursiMahasiswa(x,z);
+            addStudentChair(x,z);
             z+=3.5;
         }
         x -= 3;
@@ -123,7 +123,7 @@ function addAllKursiMahasiswa() {
     x = 19.5;
     z = 14;
     for(j=0 ; j<14 ; j++) {
-        addKursiMahasiswa(x,z);
+        addStudentChair(x,z);
         x-=3;
     }
 }
@@ -136,7 +136,70 @@ function addAllWhiteBoard() {
     }
 }
 
-function addKursiMahasiswa(x,z) {
+function addAllWindow() {
+    var i,x = 19.5;
+    for(i=0 ; i<14 ; i++) {
+        addWindow(x);
+        x-=3;
+    }
+}
+
+function addAllLecturerTable() {
+    var i,x = 8;
+    for(i=0 ; i<2 ; i++) {
+        addLecturerTable(x);
+        x+=6;
+    }
+}
+
+function addAllScreen() {
+    var i,x = -8;
+    for(i=0 ; i<2 ; i++) {
+        addScreen(x);
+        x+=13;
+    }
+}
+
+function addAllProjector() {
+    var i,x = -4;
+    for(i=0 ; i<2 ; i++) {
+        addProjector(x);
+        x+=13;
+    }
+}
+
+function addAllAC() {
+    var i,x = -15;
+    for(i=0 ; i<3 ; i++) {
+        addAC(x);
+        x+=15;
+    }
+}
+
+function addAllLamp() {
+    //lampu tengah ke belakang
+    //lampu pertama ada di kiri, loopingnya ke kanan
+    var i,j,k,l,x=-13,z=-5;
+    for(i=0 ; i<3 ; i++) {
+        for(j=0 ; j<3 ; j++) {
+            addLamp(x,z,(Math.PI));
+            z+=8;
+        }
+        x += 13;
+        z = -5;
+    }
+
+    //lampu depan dekat papan tulis
+    //kursi pertama ada di pojok kiri depan
+    x = -14;
+    z = -10;
+    for(j=0 ; j<3 ; j++) {
+        addLamp(x,z,Math.PI/2);
+        x+=13;
+    }
+}
+
+function addStudentChair(x,z) {
     var loader = new THREE.JSONLoader();
     var callbackKursiMahasiswa = function( geometry ) {
         var texture = new THREE.TextureLoader().load( "models/texturekursimahasiswa.jpg" );
@@ -148,13 +211,13 @@ function addKursiMahasiswa(x,z) {
     loader.load( "models/kursimahasiswa.json", callbackKursiMahasiswa);
 }
 
-function addMejaDosen() {
+function addLecturerTable(x) {
     var loader = new THREE.JSONLoader();
     var callbackMejaDosen = function( geometry ) {
         var texture = new THREE.TextureLoader().load( "models/texturemejadosen.jpg" );
         var material = new THREE.MeshBasicMaterial( { map : texture } ); 
         var mesh = new THREE.Mesh( geometry, material );
-        mesh.position.set(8,4.7,-8)
+        mesh.position.set(x,4.7,-8)
         mesh.rotation.y = (Math.PI/2) + (Math.PI);
         mesh.scale.set(2,2,2);
         scene.add( mesh );
@@ -169,7 +232,6 @@ function addWhiteBoard(x) {
         var material = new THREE.MeshBasicMaterial( { map : texture } ); 
         var mesh = new THREE.Mesh( geometry, material );
         mesh.position.set(x,10,-12);
-        // mesh.rotation.y = (Math.PI/2) + (Math.PI);
         mesh.scale.set(3.5,3.5,3.5);
         scene.add( mesh );
         };
@@ -182,10 +244,101 @@ function addClock() {
         var texture = new THREE.TextureLoader().load( "models/texturejamdinding.jpg" );
         var material = new THREE.MeshBasicMaterial( { map : texture } ); 
         var mesh = new THREE.Mesh( geometry, material );
-        mesh.position.set(2.7,14,-15.2)
+        mesh.position.set(2.7,14,-15.2);
         scene.add( mesh );
         };
     loader.load( "models/jamdinding.json", callbackClock);
+}
+
+function addDoor() {
+    var loader = new THREE.JSONLoader();
+    var callbackDoor = function( geometry ) {
+        var texture = new THREE.TextureLoader().load( "models/texturepintu.jpg" );
+        var material = new THREE.MeshBasicMaterial( { map : texture } ); 
+        var mesh = new THREE.Mesh( geometry, material );
+        mesh.position.set(-13,7.5,-14.6)
+        mesh.scale.set(2,2,2);
+        scene.add( mesh );
+        };
+    loader.load( "models/pintu.json", callbackDoor);
+}
+
+function addWindow(x) {
+    var loader = new THREE.JSONLoader();
+    var callbackWindow = function( geometry ) {
+        var texture = new THREE.TextureLoader().load( "models/texturejendela.jpg" );
+        var material = new THREE.MeshBasicMaterial( { map : texture } ); 
+        var mesh = new THREE.Mesh( geometry, material );
+        mesh.position.set(x,10.2,17.1)
+        mesh.scale.set(2,2,2);
+        mesh.rotation.y = Math.PI;
+        scene.add( mesh );
+        };
+    loader.load( "models/jendela.json", callbackWindow);
+}
+
+function addLecturerChair() {
+    var loader = new THREE.JSONLoader();
+    var callbackLecturerChair = function( geometry ) {
+        var texture = new THREE.TextureLoader().load( "models/texturekursidosen.jpg" );
+        var material = new THREE.MeshBasicMaterial( { map : texture } ); 
+        var mesh = new THREE.Mesh( geometry, material );
+        mesh.position.set(10,5.5,-12);
+        mesh.scale.set(1.5,1.5,1.5);
+        scene.add( mesh );
+        };
+    loader.load( "models/kursidosen.json", callbackLecturerChair);
+}
+
+function addScreen(x) {
+    var loader = new THREE.JSONLoader();
+    var callbackScreen = function( geometry ) {
+        var texture = new THREE.TextureLoader().load( "models/textureacproyektorlayar.jpg" );
+        var material = new THREE.MeshBasicMaterial( { map : texture } ); 
+        var mesh = new THREE.Mesh( geometry, material );
+        mesh.position.set(x,14.5,-14.9);
+        scene.add( mesh );
+        };
+    loader.load( "models/layar.json", callbackScreen);
+}
+
+function addProjector(x) {
+    var loader = new THREE.JSONLoader();
+    var callbackProjector = function( geometry ) {
+        var texture = new THREE.TextureLoader().load( "models/textureacproyektorlayar.jpg" );
+        var material = new THREE.MeshBasicMaterial( { map : texture } ); 
+        var mesh = new THREE.Mesh( geometry, material );
+        mesh.position.set(x,14,0);
+        mesh.rotation.y = Math.PI;
+        scene.add( mesh );
+        };
+    loader.load( "models/proyektor.json", callbackProjector);
+}
+
+function addAC(x) {
+    var loader = new THREE.JSONLoader();
+    var callbackAC = function( geometry ) {
+        var texture = new THREE.TextureLoader().load( "models/textureacproyektorlayar.jpg" );
+        var material = new THREE.MeshBasicMaterial( { map : texture } ); 
+        var mesh = new THREE.Mesh( geometry, material );
+        mesh.position.set(x,13,14);
+        mesh.rotation.y = Math.PI;
+        scene.add( mesh );
+        };
+    loader.load( "models/ac.json", callbackAC);
+}
+
+function addLamp(x,z,rotation) {
+    var loader = new THREE.JSONLoader();
+    var callbackLamp = function( geometry ) {
+        var texture = new THREE.TextureLoader().load( "models/texturelampu.jpg" );
+        var material = new THREE.MeshBasicMaterial( { map : texture } ); 
+        var mesh = new THREE.Mesh( geometry, material );
+        mesh.position.set(x,14.9,z);
+        mesh.rotation.y = rotation;
+        scene.add( mesh );
+        };
+    loader.load( "models/lampu.json", callbackLamp);
 }
 
 function createRoom() {
@@ -210,10 +363,17 @@ function createRoom() {
 
 function init() {
     createRoom();
-    addAllKursiMahasiswa();
-    addMejaDosen();
+    addAllStudentChair();
+    addAllLecturerTable();
     addAllWhiteBoard();
     addClock();
+    addDoor();
+    addAllWindow();
+    addLecturerChair();
+    addAllScreen();
+    addAllProjector();
+    addAllAC();
+    addAllLamp();
 }
 
 init();
