@@ -14,10 +14,152 @@
         </style>
 	</head>
 	<body>
+        
+        <div id="start-modal" class="modal">
+            <div class="modal-content">
+                <div class="title">
+                    <h3><b>Bagaimana Anda ingin memulai desain kelas ini?</b></h3>
+                </div>
+                <br />
+                <button onclick="startDesign('scracth')"> <b>Mulai dari awal</b> </button> <br /> <br />
+                <button onclick="startDesign('91room')"> <b>Menggunakan model kelas 09120</b> </button>
+            </div>
+        </div>
+
+        <div class="menu">
+            <div class="title"><h3>Aplikasi Pratinjau 3 Dimensi Berbasis Web</h3></div>
+            <div class="title"><h3>Ruangan Kelas FTIS UNPAR</h3></div>
+            <br />
+
+            <p><b>Pilihan</b></p>
+            <div class="submenu">
+                <button id="modalBtn"><b>Buat ulang desain</b></button> &nbsp;
+                <button onclick="printPage()"><b>Print hasil desain</b></button>
+            </div>
+
+            <br />
+
+            <p><b>Mode pratinjau</b></p>
+            <div class="submenu">
+                <button onclick="changeViewMode('inside')"><b>Dalam kelas</b></button> &nbsp;
+                <button onclick="changeViewMode('outside')"><b>Luar kelas</b></button>
+            </div>
+
+            <br />
+
+            <div id="menu-scratch">
+                <p><b>Ukuran kelas</b></p>
+                <div class="submenu">
+                    <div>
+                        <div class="inline">
+                            <p>Panjang :</p>
+                        </div>
+                        <div class="inline">
+                            <select id="panjang" onchange="getPanjangValue()">
+                                <option value="2">2 meter</option>
+                                <option value="3">3 meter</option>
+                                <option value="4">4 meter</option>
+                                <option value="5">5 meter</option>
+                                <option value="6">6 meter</option>
+                                <option value="7">7 meter</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="inline">
+                            <p>Lebar :</p>
+                        </div>
+                        <div class="inline">
+                            <select id="lebar" onchange="getLebarValue()">
+                                <option value="2">2 meter</option>
+                                <option value="3">3 meter</option>
+                                <option value="4">4 meter</option>
+                                <option value="5">5 meter</option>
+                                <option value="6">6 meter</option>
+                                <option value="7">7 meter</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <p><b>Warna dinding</b></p>
+                <div class="submenu">
+                    <img src="img/1.jpg" class="img-thumbnails" id="wall1" onclick="thumbnailClicked('wall1')"/>
+                    <img src="img/2.jpg" class="img-thumbnails" id="wall2" onclick="thumbnailClicked('wall2')"/>
+                    <img src="img/3.jpg" class="img-thumbnails" id="wall3" onclick="thumbnailClicked('wall3')"/>
+                    <img src="img/4.jpg" class="img-thumbnails" id="wall4" onclick="thumbnailClicked('wall4')"/>
+                    <br />
+                    <img src="img/1.jpg" class="img-thumbnails" id="wall5" onclick="thumbnailClicked('wall5')"/>
+                    <img src="img/2.jpg" class="img-thumbnails" id="wall6" onclick="thumbnailClicked('wall6')"/>
+                    <img src="img/3.jpg" class="img-thumbnails" id="wall7" onclick="thumbnailClicked('wall7')"/>
+                    <img src="img/4.jpg" class="img-thumbnails" id="wall8" onclick="thumbnailClicked('wall8')"/>
+                </div>
+
+                <p><b>Warna lantai</b></p>
+                <div class="submenu">
+                    <img src="img/1.jpg" class="img-thumbnails" id="floor1" onclick="thumbnailClicked('floor1')"/>
+                    <img src="img/2.jpg" class="img-thumbnails" id="floor2" onclick="thumbnailClicked('floor2')"/>
+                    <img src="img/3.jpg" class="img-thumbnails" id="floor3" onclick="thumbnailClicked('floor3')"/>
+                    <img src="img/4.jpg" class="img-thumbnails" id="floor4" onclick="thumbnailClicked('floor4')"/>
+                    <br />
+                    <img src="img/1.jpg" class="img-thumbnails" id="floor5" onclick="thumbnailClicked('floor5')"/>
+                    <img src="img/2.jpg" class="img-thumbnails" id="floor6" onclick="thumbnailClicked('floor6')"/>
+                    <img src="img/3.jpg" class="img-thumbnails" id="floor7" onclick="thumbnailClicked('floor7')"/>
+                    <img src="img/4.jpg" class="img-thumbnails" id="floor8" onclick="thumbnailClicked('floor8')"/>
+                </div>
+
+                <p><b>Properti kelas</b></p>
+                <div class="submenu">
+                    <img src="img/1.jpg" class="prop-thumbnails" id="prop1" onclick="thumbnailClicked('prop1')"/>
+                    <img src="img/2.jpg" class="prop-thumbnails" id="prop2" onclick="thumbnailClicked('prop2')"/>
+                    <br />
+                    <img src="img/3.jpg" class="prop-thumbnails" id="prop3" onclick="thumbnailClicked('prop3')"/>
+                    <img src="img/4.jpg" class="prop-thumbnails" id="prop4" onclick="thumbnailClicked('prop4')"/>
+                    <br />
+                    <img src="img/1.jpg" class="prop-thumbnails" id="prop5" onclick="thumbnailClicked('prop5')"/>
+                    <img src="img/2.jpg" class="prop-thumbnails" id="prop6" onclick="thumbnailClicked('prop6')"/>
+                    <br />
+                    <img src="img/3.jpg" class="prop-thumbnails" id="prop7" onclick="thumbnailClicked('prop7')"/>
+                    <img src="img/4.jpg" class="prop-thumbnails" id="prop8" onclick="thumbnailClicked('prop8')"/>
+                </div>
+            </div>
+
+            <div id="menu-91room">
+                <p><b>Warna dinding</b></p>
+                <div class="submenu">
+                    <img src="img/1.jpg" class="img-thumbnails" id="secwall1" onclick="thumbnailClicked('secwall1')"/>
+                    <img src="img/2.jpg" class="img-thumbnails" id="secwall2" onclick="thumbnailClicked('secwall2')"/>
+                    <img src="img/3.jpg" class="img-thumbnails" id="secwall3" onclick="thumbnailClicked('secwall3')"/>
+                    <img src="img/4.jpg" class="img-thumbnails" id="secwall4" onclick="thumbnailClicked('secwall4')"/>
+                    <br />
+                    <img src="img/1.jpg" class="img-thumbnails" id="secwall5" onclick="thumbnailClicked('secwall5')"/>
+                    <img src="img/2.jpg" class="img-thumbnails" id="secwall6" onclick="thumbnailClicked('secwall6')"/>
+                    <img src="img/3.jpg" class="img-thumbnails" id="secwall7" onclick="thumbnailClicked('secwall7')"/>
+                    <img src="img/4.jpg" class="img-thumbnails" id="secwall8" onclick="thumbnailClicked('secwall8')"/>
+                </div>
+
+                <p><b>Warna lantai</b></p>
+                <div class="submenu">
+                    <img src="img/1.jpg" class="img-thumbnails" id="tile1" onclick="thumbnailClicked('tile1')"/>
+                    <img src="img/2.jpg" class="img-thumbnails" id="tile2" onclick="thumbnailClicked('tile2')"/>
+                    <img src="img/3.jpg" class="img-thumbnails" id="tile3" onclick="thumbnailClicked('tile3')"/>
+                    <img src="img/4.jpg" class="img-thumbnails" id="tile4" onclick="thumbnailClicked('tile4')"/>
+                    <br />
+                    <img src="img/1.jpg" class="img-thumbnails" id="tile5" onclick="thumbnailClicked('tile5')"/>
+                    <img src="img/2.jpg" class="img-thumbnails" id="tile6" onclick="thumbnailClicked('tile6')"/>
+                    <img src="img/3.jpg" class="img-thumbnails" id="tile7" onclick="thumbnailClicked('tile7')"/>
+                    <img src="img/4.jpg" class="img-thumbnails" id="tile8" onclick="thumbnailClicked('tile8')"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="model">
+            <canvas id="canvas"></canvas>
+        </div>
+
         <script src="js/three.js"></script>
         <script src="js/OrbitControls.js"></script>
         <script src="js/Main.js"></script>
-        <!-- <script src="js/OBJLoader.js"></script> -->
-        <!-- <script src="js/MTLLoader.js"></script> -->
+        <link rel="stylesheet" href="css/custom.css">
 	</body>
 </html>

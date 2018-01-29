@@ -1,14 +1,21 @@
+//what you viewing, where you had objects in, what you interact with
 var scene = new THREE.Scene();
+
+//set the world's color to white
+scene.background = new THREE.Color(0xa9d9ef);
+
+//user see the world through this
+//params: vertical field of view (how much you see), ratio of browser, near plane, far plane.
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
 
-var renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
+//make its own canvas element, because it have no params (not anymore hehe)
+var renderer = new THREE.WebGLRenderer({canvas: document.getElementById('canvas'), antialias: true});
+renderer.setSize(window.innerWidth/1.5, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
+//change the world color
+// renderer.setClearColor(0xffff22,0);
 
-var fovMax = 95,
-fovMin = 5,
-fovTmp = 0;
 //responsive renderer size
 window.addEventListener('resize', function() {
     var width = window.innerWidth;
@@ -20,79 +27,14 @@ window.addEventListener('resize', function() {
 
 //making control of the camera
 controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.minDistance = 15;
+controls.maxDistance = 42;
 
+//add lighting
 var light1 = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(light1);
 
 //render model
-
-
-// var mtlLoader = new THREE.MTLLoader();
-// mtlLoader.load( "kursiftis.mtl", function( materials ) {
-//     materials.preload();
-//     var objLoader = new THREE.OBJLoader();
-//     objLoader.setMaterials( materials );
-//     objLoader.load("models/kursiftis.obj", function ( object ) {
-//         scene.add(object);
-//     });
-// });
-
-
-
-
-// var loader = new THREE.OBJLoader();
-
-// // load a resource
-// loader.load(
-//     // resource URL
-//     'models/kursiftis.obj',
-//     // Function when resource is loaded
-//     function ( object ) {
-//         scene.add( object );
-//     }
-// );
-
-
-
-// var loader = new THREE.ObjectLoader();
-// loader.load("models/kursiftis.json",function ( obj ) {
-//     scene.add( obj );
-// });
-
-
-
-// var loader = new THREE.ObjectLoader();
-// loader.load("models/monster.obj",function ( obj ) {
-//     scene.add( obj );
-// });
-
-// var loader = new THREE.JSONLoader();
-// loader.load( 'models/monster.json', function ( geometry, materials ) {
-//     var mesh = new THREE.Mesh( geometry, new (THREE.MultiMaterial)(materials) );
-//     scene.add( mesh );
-// });
-
-// var loader = new THREE.JSONLoader();
-// loader.load( 'models/dog.json', function ( geometry, materials ) {
-//     var material = [
-//         new THREE.MeshStandardMaterial( { color: 0x00ff00 } ),
-//     ];
-//     var mesh = new THREE.Mesh( geometry, material );
-//     scene.add( mesh );
-//     var loader = new THREE.TextureLoader();
-//     loader.load("models/dogUV.png", function(texture) {
-//         console.log("masuk kok")
-//         // Apply texture to material.
-//         materials.map = texture;
-//         // Maybe this is needed.
-//         materials.needsUpdate = true;
-//     })
-// });
-
-
-
-
-
 function addAllStudentChair() {
     //sisi kanan
     //kursi pertama ada di tengah, loopingnya ke kanan
@@ -345,13 +287,17 @@ function createRoom() {
     // create shape
     // params: x, y, and z axis
     var geometry = new THREE.BoxGeometry( 43, 12, 31 )
+    //to remove the face
+    // transparent:true
+    // opacity:0.0
     var cubeMaterials = [
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding.jpg'), side: THREE.DoubleSide }),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding.jpg'), side: THREE.DoubleSide }),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/textureatap.jpg'), side: THREE.DoubleSide }),
+        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding.jpg'), side: THREE.DoubleSide, transparent:true, opacity:0.2 }),
+        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding.jpg'), side: THREE.DoubleSide, transparent:true, opacity:0.2  }),
+        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/textureatap.jpg'), side: THREE.DoubleSide, transparent:true, opacity:0.2 }),
         new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturelantai.jpg'), side: THREE.DoubleSide }),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding.jpg'), side: THREE.DoubleSide }),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding.jpg'), side: THREE.DoubleSide }),
+        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding.jpg'), side: THREE.DoubleSide, transparent:true, opacity:0.2 }),
+        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding.jpg'), side: THREE.DoubleSide, transparent:true, opacity:0.2 }),
+        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding.jpg'), side: THREE.DoubleSide, transparent:true, opacity:0.2 }),
     ]
 
     // create a material, colour, and image texture
@@ -361,24 +307,24 @@ function createRoom() {
     scene.add(cube);
 }
 
-function init() {
-    createRoom();
-    addAllStudentChair();
-    addAllLecturerTable();
-    addAllWhiteBoard();
-    addClock();
-    addDoor();
-    addAllWindow();
-    addLecturerChair();
-    addAllScreen();
-    addAllProjector();
-    addAllAC();
-    addAllLamp();
-}
+// function init() {
+//     createRoom();
+//     addAllStudentChair();
+//     addAllLecturerTable();
+//     addAllWhiteBoard();
+//     addClock();
+//     addDoor();
+//     addAllWindow();
+//     addLecturerChair();
+//     addAllScreen();
+//     addAllProjector();
+//     addAllAC();
+//     addAllLamp();
+// }
 
-init();
+// init();
 
-camera.position.set(-1, 8, 10);
+camera.position.set(0, 10, 40);
 
 var ambientLight =  new THREE.AmbientLight(0xFFFFFF, 0.8);
 scene.add(ambientLight);
@@ -397,8 +343,110 @@ var render = function() {
 //run all the animation (update, render, repeat )
 var main = function() {
     requestAnimationFrame(main);
-    update();
+    // update();
     render ();
 }
 
 main();
+
+
+function getPanjangValue() {
+    var e = document.getElementById("panjang");
+    var strUser = e.options[e.selectedIndex].value;
+    console.log(strUser);
+}
+
+function getLebarValue() {
+    var e = document.getElementById("lebar");
+    var strUser = e.options[e.selectedIndex].value;
+    console.log(strUser);
+}
+
+function thumbnailClicked(id) {
+    for(i=1 ; i<=8 ; i++) {
+        if(id.charAt(0) == 'w') {
+            var removeId = 'wall' + i;
+        } else if (id.charAt(0) == 'f') {
+            var removeId = 'floor' + i;
+        } else if(id.charAt(0) == 'p') {
+            var removeId = 'prop' + i;
+        } else if(id.charAt(0) == 's') {
+            var removeId = 'secwall' + i;
+        } else {
+            var removeId = 'tile' + i;
+        }
+        document.getElementById(removeId).style.border = "none";
+    }
+    document.getElementById(id).style.border = "3px solid";
+    console.log(id);
+}
+
+function startDesign(mode) {
+    showMenu(mode);
+    if(mode=='scracth') {
+        createRoom();
+    } else {
+        createRoom();
+        addAllStudentChair();
+        addAllLecturerTable();
+        addAllWhiteBoard();
+        addClock();
+        addDoor();
+        addAllWindow();
+        addLecturerChair();
+        addAllScreen();
+        addAllProjector();
+        addAllAC();
+        addAllLamp();
+    }
+    modal.style.display = "none";
+}
+
+
+//MODAL THINGS
+//get the modal
+var modal = document.getElementById('start-modal');
+
+var btn = document.getElementById('modalBtn');
+
+btn.onclick = function () {
+    location.reload();
+}
+
+function printPage() {
+    window.print();
+}
+
+//MENU THINGS
+//show which menu to show after the user select the how to start with
+function showMenu(menu) {
+    var divScracth = document.getElementById('menu-scratch');
+    var div91Room = document.getElementById('menu-91room');
+
+    if(menu=='scracth') {
+        divScracth.style.display = "block";
+        div91Room.style.display = "none";
+    } else {
+        divScracth.style.display = "none";
+        div91Room.style.display = "block";
+    }
+}
+
+//VIEW THINGS
+function changeViewMode(mode) {
+    if(mode=='inside') {
+        camera.position.set(0, 10, 0);
+        controls.minDistance = 5;
+        controls.maxDistance = 15;
+
+        controls.target = new THREE.Vector3(0, 10, 0);
+
+        // camera.lookAt(0,10,0);
+        // var vector = new THREE.Vector3(0, -1, -1);
+        // vector.applyQuarternion(camera.quarternion);
+    } else {
+        camera.position.set(0, 10, 40);
+        controls.minDistance = 10;
+        controls.maxDistance = 42;
+    }
+}
