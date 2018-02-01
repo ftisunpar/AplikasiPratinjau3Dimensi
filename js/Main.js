@@ -283,27 +283,47 @@ function addLamp(x,z,rotation) {
     loader.load( "models/lampu.json", callbackLamp);
 }
 
-function createRoom() {
+function createCubeMaterials(wallColor, opacity) {
+    var cubeMaterials = [
+        new THREE.MeshBasicMaterial({ map: wallColor, side: THREE.DoubleSide, transparent:true, opacity }),
+        new THREE.MeshBasicMaterial({ map: wallColor, side: THREE.DoubleSide, transparent:true, opacity  }),
+        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/textureatap.jpg'), side: THREE.DoubleSide, transparent:true, opacity }),
+        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturelantai.jpg'), side: THREE.DoubleSide }),
+        new THREE.MeshBasicMaterial({ map: wallColor, side: THREE.DoubleSide, transparent:true, opacity }),
+        new THREE.MeshBasicMaterial({ map: wallColor, side: THREE.DoubleSide, transparent:true, opacity })
+    ]
+
+    return cubeMaterials;
+}
+
+function createRoomGeometry(length, width, height) {
+    var geometry = new THREE.BoxGeometry(length, width, height);
+
+    return geometry;
+}
+
+function createRoom(wallColor, opacity, length, width, height) {
+    wallColor = wallColor || new THREE.TextureLoader().load('img/texturedinding.jpg');
+    opacity = opacity || 0.2;
+    length = length || 43;
+    width = width || 12;
+    height = height || 31;
+
+    var previousRoom = scene.getObjectByName('room');
+    scene.remove(previousRoom);
+    previousRoom = undefined;
+
     // create shape
     // params: x, y, and z axis
-    var geometry = new THREE.BoxGeometry( 43, 12, 31 )
-    //to remove the face
-    // transparent:true
-    // opacity:0.0
-    var cubeMaterials = [
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding.jpg'), side: THREE.DoubleSide, transparent:true, opacity:0.2 }),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding.jpg'), side: THREE.DoubleSide, transparent:true, opacity:0.2  }),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/textureatap.jpg'), side: THREE.DoubleSide, transparent:true, opacity:0.2 }),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturelantai.jpg'), side: THREE.DoubleSide }),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding.jpg'), side: THREE.DoubleSide, transparent:true, opacity:0.2 }),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding.jpg'), side: THREE.DoubleSide, transparent:true, opacity:0.2 }),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding.jpg'), side: THREE.DoubleSide, transparent:true, opacity:0.2 }),
-    ]
+    var geometry = createRoomGeometry(length, width, height);
+    
+    var cubeMaterials = createCubeMaterials(wallColor, opacity);
 
     // create a material, colour, and image texture
     var material = new THREE.MeshFaceMaterial(cubeMaterials);
     var cube = new THREE.Mesh(geometry, material);
     cube.position.y = 9.05;
+    cube.name = 'room';
     scene.add(cube);
 }
 
@@ -435,16 +455,17 @@ function showMenu(menu) {
 //VIEW THINGS
 function changeViewMode(mode) {
     if(mode=='inside') {
+        createRoom(undefined, 1);
+
         camera.position.set(0, 10, 0);
         controls.minDistance = 5;
         controls.maxDistance = 15;
 
         controls.target = new THREE.Vector3(0, 10, 0);
-
-        // camera.lookAt(0,10,0);
-        // var vector = new THREE.Vector3(0, -1, -1);
-        // vector.applyQuarternion(camera.quarternion);
     } else {
+        console.log("outside mode")
+        createRoom();
+
         camera.position.set(0, 10, 40);
         controls.minDistance = 10;
         controls.maxDistance = 42;
