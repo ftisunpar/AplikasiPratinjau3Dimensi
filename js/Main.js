@@ -283,41 +283,56 @@ function addLamp(x,z,rotation) {
     loader.load( "models/lampu.json", callbackLamp);
 }
 
-function createCubeMaterials(wallColor, opacity) {
-    var cubeMaterials = [
+
+//room's attribute
+var cubeMaterials = [
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding8.jpg'), side: THREE.DoubleSide, transparent:true, opacity: 0.2 }),
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding8.jpg'), side: THREE.DoubleSide, transparent:true, opacity: 0.2  }),
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/textureatap.jpg'), side: THREE.DoubleSide, transparent:true, opacity: 0.2 }),
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturelantai8.jpg'), side: THREE.DoubleSide }),
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding8.jpg'), side: THREE.DoubleSide, transparent:true, opacity: 0.2 }),
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding8.jpg'), side: THREE.DoubleSide, transparent:true, opacity: 0.2 })
+]
+
+var length = 43;
+var width = 12;
+var height = 31;
+
+function setCubeMaterials(wallColor, tileColor, opacity) {
+    cubeMaterials = [
         new THREE.MeshBasicMaterial({ map: wallColor, side: THREE.DoubleSide, transparent:true, opacity }),
         new THREE.MeshBasicMaterial({ map: wallColor, side: THREE.DoubleSide, transparent:true, opacity  }),
         new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/textureatap.jpg'), side: THREE.DoubleSide, transparent:true, opacity }),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturelantai.jpg'), side: THREE.DoubleSide }),
+        new THREE.MeshBasicMaterial({ map: tileColor, side: THREE.DoubleSide }),
         new THREE.MeshBasicMaterial({ map: wallColor, side: THREE.DoubleSide, transparent:true, opacity }),
         new THREE.MeshBasicMaterial({ map: wallColor, side: THREE.DoubleSide, transparent:true, opacity })
     ]
-
-    return cubeMaterials;
+    createRoom();
 }
 
-function createRoomGeometry(length, width, height) {
-    var geometry = new THREE.BoxGeometry(length, width, height);
-
-    return geometry;
+function setRoomLength(length) {
+    length = length;
+    createRoom();
 }
 
-function createRoom(wallColor, opacity, length, width, height) {
-    wallColor = wallColor || new THREE.TextureLoader().load('img/texturedinding.jpg');
-    opacity = opacity || 0.2;
-    length = length || 43;
-    width = width || 12;
-    height = height || 31;
+function setRoomWidth(width) {
+    width = width;
+    createRoom();
+}
 
+function setRoomHeight(height) {
+    height = height;
+    createRoom();
+}
+
+function createRoom() {
     var previousRoom = scene.getObjectByName('room');
     scene.remove(previousRoom);
     previousRoom = undefined;
 
     // create shape
     // params: x, y, and z axis
-    var geometry = createRoomGeometry(length, width, height);
-    
-    var cubeMaterials = createCubeMaterials(wallColor, opacity);
+    var geometry = new THREE.BoxGeometry(length, width, height);
 
     // create a material, colour, and image texture
     var material = new THREE.MeshFaceMaterial(cubeMaterials);
@@ -384,16 +399,16 @@ function getLebarValue() {
 
 function thumbnailClicked(id) {
     for(i=1 ; i<=8 ; i++) {
-        if(id.charAt(0) == 'w') {
-            var removeId = 'wall' + i;
-        } else if (id.charAt(0) == 'f') {
-            var removeId = 'floor' + i;
-        } else if(id.charAt(0) == 'p') {
-            var removeId = 'prop' + i;
-        } else if(id.charAt(0) == 's') {
-            var removeId = 'secwall' + i;
+        if(id.charAt(0) == 'a') {
+            var removeId = 'awall' + i;
+        } else if (id.charAt(0) == 'b') {
+            var removeId = 'btile' + i;
+        } else if(id.charAt(0) == 'c') {
+            var removeId = 'cprop' + i;
+        } else if(id.charAt(0) == 'd') {
+            var removeId = 'dwall' + i;
         } else {
-            var removeId = 'tile' + i;
+            var removeId = 'etile' + i;
         }
         document.getElementById(removeId).style.border = "none";
     }
@@ -402,6 +417,13 @@ function thumbnailClicked(id) {
 
 
 }
+
+// function changeMaterial(id) {
+//     if(id.charAt(0)=='a' || id.charAt(0)=='d') {
+//         var newWall = new THREE.TextureLoader().load('img/texturedinding' + id.charAt(4) + '.jpg');
+//         createRoom(newWall)
+//     }
+// }
 
 function startDesign(mode) {
     showMenu(mode);
