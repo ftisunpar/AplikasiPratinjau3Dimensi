@@ -399,6 +399,8 @@ function thumbnailClicked(id) {
     }
     document.getElementById(id).style.border = "3px solid";
     console.log(id);
+
+
 }
 
 function startDesign(mode) {
@@ -463,7 +465,6 @@ function changeViewMode(mode) {
 
         controls.target = new THREE.Vector3(0, 10, 0);
     } else {
-        console.log("outside mode")
         createRoom();
 
         camera.position.set(0, 10, 40);
