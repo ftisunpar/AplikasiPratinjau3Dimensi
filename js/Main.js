@@ -157,13 +157,19 @@ function addLecturerTable(x) {
     var loader = new THREE.JSONLoader();
     var callbackMejaDosen = function( geometry ) {
         var texture = new THREE.TextureLoader().load( "models/texturemejadosen.jpg" );
-        var material = new THREE.MeshBasicMaterial( { map : texture } ); 
+        var material = new THREE.MeshBasicMaterial( { map: texture } ); 
         var mesh = new THREE.Mesh( geometry, material );
+        mesh.name = 'lecturerTable';
         mesh.position.set(x,4.7,-8)
         mesh.rotation.y = (Math.PI/2) + (Math.PI);
         mesh.scale.set(2,2,2);
         scene.add( mesh );
-        };
+
+        domEvents.addEventListener(mesh, 'click', function(event){
+            console.log('you clicked on the table');
+            selectProperty(mesh.name);
+        }, false)
+    };
     loader.load( "models/mejadosen.json", callbackMejaDosen);
 }
 
@@ -173,9 +179,15 @@ function addWhiteBoard(x) {
         var texture = new THREE.TextureLoader().load( "models/texturepapantulis.jpg" );
         var material = new THREE.MeshBasicMaterial( { map : texture } ); 
         var mesh = new THREE.Mesh( geometry, material );
+        mesh.name = 'board';
         mesh.position.set(x,10,-12);
         mesh.scale.set(3.5,3.5,3.5);
         scene.add( mesh );
+
+        domEvents.addEventListener(mesh, 'click', function(event){
+            console.log('you clicked on the board');
+            selectProperty(mesh.name);
+        }, false)
         };
     loader.load( "models/papantulis.json", callbackWhiteBoard);
 }
@@ -186,8 +198,14 @@ function addClock() {
         var texture = new THREE.TextureLoader().load( "models/texturejamdinding.jpg" );
         var material = new THREE.MeshBasicMaterial( { map : texture } ); 
         var mesh = new THREE.Mesh( geometry, material );
+        mesh.name = 'clock';
         mesh.position.set(2.7,14,-15.2);
         scene.add( mesh );
+
+        domEvents.addEventListener(mesh, 'click', function(event){
+            console.log('you clicked on the clock');
+            selectProperty(mesh.name);
+        }, false)
         };
     loader.load( "models/jamdinding.json", callbackClock);
 }
@@ -283,30 +301,51 @@ function addLamp(x,z,rotation) {
     loader.load( "models/lampu.json", callbackLamp);
 }
 
+var domEvents	= new THREEx.DomEvents(camera, renderer.domElement);
+
+//select prop
+function selectProperty(meshName) {
+    var unselectedMesh = scene.getObjectByName('selectedMesh');
+    scene.remove(unselectedMesh);
+    unselectedMesh = undefined;
+
+    var oriMesh = scene.getObjectByName(meshName);
+    
+    var selectedMaterial = new THREE.MeshBasicMaterial({ color: 0x3bff41, transparent: true, opacity: 0.5 });
+    var selectedMesh = new THREE.Mesh( oriMesh.geometry, selectedMaterial );
+    selectedMesh.name = 'selectedMesh';
+
+    selectedMesh.position.set(oriMesh.position.x, oriMesh.position.y, oriMesh.position.z);
+    selectedMesh.rotation.y = oriMesh.rotation.y;
+    selectedMesh.scale.set(oriMesh.scale.x, oriMesh.scale.y, oriMesh.scale.z);
+
+    scene.add(selectedMesh);
+}
 
 //room's attribute
 var cubeMaterials = [
-    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding8.jpg'), side: THREE.DoubleSide, transparent:true, opacity: 0.2 }),
-    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding8.jpg'), side: THREE.DoubleSide, transparent:true, opacity: 0.2  }),
-    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/textureatap.jpg'), side: THREE.DoubleSide, transparent:true, opacity: 0.2 }),
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding8.jpg'), side: THREE.BackSide }),
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding8.jpg'), side: THREE.BackSide }),
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/textureatap.jpg'), side: THREE.BackSide }),
     new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturelantai8.jpg'), side: THREE.DoubleSide }),
-    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding8.jpg'), side: THREE.DoubleSide, transparent:true, opacity: 0.2 }),
-    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding8.jpg'), side: THREE.DoubleSide, transparent:true, opacity: 0.2 })
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding8.jpg'), side: THREE.BackSide }),
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding8.jpg'), side: THREE.BackSide })
 ]
 
 var length = 43;
 var width = 12;
 var height = 31;
 
-function setCubeMaterials(wallColor, tileColor, opacity) {
-    cubeMaterials = [
-        new THREE.MeshBasicMaterial({ map: wallColor, side: THREE.DoubleSide, transparent:true, opacity }),
-        new THREE.MeshBasicMaterial({ map: wallColor, side: THREE.DoubleSide, transparent:true, opacity  }),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/textureatap.jpg'), side: THREE.DoubleSide, transparent:true, opacity }),
-        new THREE.MeshBasicMaterial({ map: tileColor, side: THREE.DoubleSide }),
-        new THREE.MeshBasicMaterial({ map: wallColor, side: THREE.DoubleSide, transparent:true, opacity }),
-        new THREE.MeshBasicMaterial({ map: wallColor, side: THREE.DoubleSide, transparent:true, opacity })
-    ]
+function setWallColor(number) {
+    cubeMaterials[0] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding' + number + '.jpg'), side: THREE.BackSide });
+    cubeMaterials[1] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding' + number + '.jpg'), side: THREE.BackSide });
+    cubeMaterials[4] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding' + number + '.jpg'), side: THREE.BackSide });
+    cubeMaterials[5] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding' + number + '.jpg'), side: THREE.BackSide });
+    createRoom();
+}
+
+function setTileColor(number) {
+    cubeMaterials[3] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturelantai' + number +'.jpg'), side: THREE.DoubleSide });
     createRoom();
 }
 
@@ -415,15 +454,17 @@ function thumbnailClicked(id) {
     document.getElementById(id).style.border = "3px solid";
     console.log(id);
 
-
+    changeMaterial(id);
 }
 
-// function changeMaterial(id) {
-//     if(id.charAt(0)=='a' || id.charAt(0)=='d') {
-//         var newWall = new THREE.TextureLoader().load('img/texturedinding' + id.charAt(4) + '.jpg');
-//         createRoom(newWall)
-//     }
-// }
+function changeMaterial(id) {
+    if(id.charAt(0)=='a' || id.charAt(0)=='d') {
+        setWallColor(id.charAt(5));
+    } else {
+        console.log('eh kepanggil')
+        setTileColor(id.charAt(5));
+    }
+}
 
 function startDesign(mode) {
     showMenu(mode);
