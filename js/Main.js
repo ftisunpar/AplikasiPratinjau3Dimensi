@@ -199,7 +199,8 @@ function addClock() {
         var material = new THREE.MeshBasicMaterial( { map : texture } ); 
         var mesh = new THREE.Mesh( geometry, material );
         mesh.name = 'clock';
-        mesh.position.set(2.7,14,-15.2);
+        mesh.position.set(2.7,7,-15.2);
+        mesh.scale.set(4,4,4);
         scene.add( mesh );
 
         domEvents.addEventListener(mesh, 'click', function(event){
@@ -324,12 +325,12 @@ function selectProperty(meshName) {
 
 //room's attribute
 var cubeMaterials = [
-    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding8.jpg'), side: THREE.BackSide }),
-    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding8.jpg'), side: THREE.BackSide }),
-    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/textureatap.jpg'), side: THREE.BackSide }),
-    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturelantai8.jpg'), side: THREE.DoubleSide }),
-    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding8.jpg'), side: THREE.BackSide }),
-    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding8.jpg'), side: THREE.BackSide })
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/white.jpg'), side: THREE.BackSide }),
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/white.jpg'), side: THREE.BackSide }),
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/white.jpg'), side: THREE.BackSide }),
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/white.jpg'), side: THREE.DoubleSide }),
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/white.jpg'), side: THREE.BackSide }),
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/white.jpg'), side: THREE.BackSide })
 ]
 
 var length = 43;
@@ -470,6 +471,7 @@ function startDesign(mode) {
     showMenu(mode);
     if(mode=='scracth') {
         createRoom();
+        addClock();
     } else {
         createRoom();
         addAllStudentChair();
