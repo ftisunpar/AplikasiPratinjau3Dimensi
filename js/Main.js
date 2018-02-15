@@ -14,6 +14,7 @@ var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHei
 camera.position.set(0, 10, 40);
 
 
+
 /** RENDERER */
 //make its own canvas element, because it have no params (not anymore hehe)
 var renderer = new THREE.WebGLRenderer({canvas: document.getElementById('canvas'), antialias: true});
@@ -42,6 +43,7 @@ controls = new THREE.OrbitControls(camera, renderer.domElement);
 //initialize camera zoom
 controls.minDistance = 15;
 controls.maxDistance = 42;
+
 
 
 /** LIGHT */
@@ -402,7 +404,6 @@ function setWallColor(number) {
     createRoom();
 }
 
-
 //+++++++++++++++++++++++++++++
 //change the tile color
 //+++++++++++++++++++++++++++++
@@ -410,7 +411,6 @@ function setTileColor(number) {
     cubeMaterials[3] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturelantai' + number +'.jpg'), side: THREE.DoubleSide });
     createRoom();
 }
-
 
 //+++++++++++++++++++++++++++++
 //change the room size
@@ -505,14 +505,19 @@ function thumbnailClicked(id) {
     changeMaterial(id);
 }
 
+
+
 /** JS FOR THE INTERFACE */
+
+//+++++++++++++++++++++++++++++++
 //MODAL THINGS
+//pop up the modal when the app opened for the first time
+//+++++++++++++++++++++++++++++++
 //get the modal
 var modal = document.getElementById('start-modal');
 
 //get the button
 var btn = document.getElementById('modalBtn');
-
 
 //refresh page when click the 'buat ulang desain'
 //refresh the page because it will remove all of the current choice and bringing back the modal
@@ -525,9 +530,10 @@ function printPage() {
     window.print();
 }
 
-
+//++++++++++++++++++++++++++++++++
 //MENU THINGS
 //show which menu to show after the user select the how to start with
+//++++++++++++++++++++++++++++++++
 function showMenu(menu) {
     var divScracth = document.getElementById('menu-scratch');
     var div91Room = document.getElementById('menu-91room');
@@ -541,8 +547,10 @@ function showMenu(menu) {
     }
 }
 
+//++++++++++++++++++++++++++++++++++
 //VIEW THINGS
 //view the room from inside and outside
+//++++++++++++++++++++++++++++++++++
 function changeViewMode(mode) {
     if(mode=='inside') {
         createRoom(undefined, 1);
