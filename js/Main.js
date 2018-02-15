@@ -465,18 +465,6 @@ function startDesign() {
 startDesign();
 
 /** RECEIVING INPUT FROM INTERFACE */
-function getPanjangValue() {
-    var e = document.getElementById("panjang");
-    var strUser = e.options[e.selectedIndex].value;
-    console.log(strUser);
-}
-
-function getLebarValue() {
-    var e = document.getElementById("lebar");
-    var strUser = e.options[e.selectedIndex].value;
-    console.log(strUser);
-}
-
 function thumbnailClicked(id) {
     for(i=1 ; i<=8 ; i++) {
         if(id.charAt(0) == 'a') {
