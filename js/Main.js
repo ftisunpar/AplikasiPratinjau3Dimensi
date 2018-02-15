@@ -359,29 +359,6 @@ function createRoom() {
 
 
 /** FEATURE */
-//+++++++++++++++++++++++++
-//select mesh feature
-//the current selected mesh will be green
-//+++++++++++++++++++++++++
-var domEvents	= new THREEx.DomEvents(camera, renderer.domElement);
-function selectProperty(meshName) {
-    var unselectedMesh = scene.getObjectByName('selectedMesh');
-    scene.remove(unselectedMesh);
-    unselectedMesh = undefined;
-
-    var oriMesh = scene.getObjectByName(meshName);
-    
-    var selectedMaterial = new THREE.MeshBasicMaterial({ color: 0x3bff41, transparent: true, opacity: 0.5 });
-    var selectedMesh = new THREE.Mesh( oriMesh.geometry, selectedMaterial );
-    selectedMesh.name = 'selectedMesh';
-
-    selectedMesh.position.set(oriMesh.position.x, oriMesh.position.y, oriMesh.position.z);
-    selectedMesh.rotation.y = oriMesh.rotation.y;
-    selectedMesh.scale.set(oriMesh.scale.x, oriMesh.scale.y, oriMesh.scale.z);
-
-    scene.add(selectedMesh);
-}
-
 //++++++++++++++++++++++++++++
 //the main function to change the wall and tile's color
 //++++++++++++++++++++++++++++
@@ -489,19 +466,9 @@ function thumbnailClicked(id) {
 
 
 /** JS FOR THE INTERFACE */
-
-//+++++++++++++++++++++++++++++++
-//MODAL THINGS
-//pop up the modal when the app opened for the first time
-//+++++++++++++++++++++++++++++++
-//get the modal
-var modal = document.getElementById('start-modal');
-
-//get the button
-var btn = document.getElementById('modalBtn');
-
 //refresh page when click the 'buat ulang desain'
-//refresh the page because it will remove all of the current choice and bringing back the modal
+//refresh the page because it will remove all of the current choice
+var btn = document.getElementById('refreshBtn');
 btn.onclick = function () {
     location.reload();
 }
@@ -511,22 +478,7 @@ function printPage() {
     window.print();
 }
 
-//++++++++++++++++++++++++++++++++
-//MENU THINGS
-//show which menu to show after the user select the how to start with
-//++++++++++++++++++++++++++++++++
-function showMenu(menu) {
-    var divScracth = document.getElementById('menu-scratch');
-    var div91Room = document.getElementById('menu-91room');
 
-    if(menu=='scracth') {
-        divScracth.style.display = "block";
-        div91Room.style.display = "none";
-    } else {
-        divScracth.style.display = "none";
-        div91Room.style.display = "block";
-    }
-}
 
 //++++++++++++++++++++++++++++++++++
 //VIEW THINGS
