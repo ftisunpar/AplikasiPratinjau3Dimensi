@@ -187,11 +187,6 @@ function addLecturerTable(x) {
         mesh.rotation.y = (Math.PI/2) + (Math.PI);
         mesh.scale.set(2,2,2);
         scene.add( mesh );
-
-        domEvents.addEventListener(mesh, 'click', function(event){
-            console.log('you clicked on the table');
-            selectProperty(mesh.name);
-        }, false)
     };
     loader.load( "models/mejadosen.json", callbackMejaDosen);
 }
@@ -206,11 +201,6 @@ function addWhiteBoard(x) {
         mesh.position.set(x,10,-12);
         mesh.scale.set(3.5,3.5,3.5);
         scene.add( mesh );
-
-        domEvents.addEventListener(mesh, 'click', function(event){
-            console.log('you clicked on the board');
-            selectProperty(mesh.name);
-        }, false)
         };
     loader.load( "models/papantulis.json", callbackWhiteBoard);
 }
@@ -224,11 +214,6 @@ function addClock() {
         mesh.name = 'clock';
         mesh.position.set(2.7,14,-15.2);
         scene.add( mesh );
-
-        domEvents.addEventListener(mesh, 'click', function(event){
-            console.log('you clicked on the clock');
-            selectProperty(mesh.name);
-        }, false)
         };
     loader.load( "models/jamdinding.json", callbackClock);
 }
