@@ -448,28 +448,21 @@ var main = function() {
 
 main();
 
-function startDesign(mode) {
-    showMenu(mode);
-    if(mode=='scracth') {
-        createRoom();
-    } else {
-        createRoom();
-        addAllStudentChair();
-        addAllLecturerTable();
-        addAllWhiteBoard();
-        addClock();
-        addDoor();
-        addAllWindow();
-        addLecturerChair();
-        addAllScreen();
-        addAllProjector();
-        addAllAC();
-        addAllLamp();
-    }
-    modal.style.display = "none";
+function startDesign() {
+    createRoom();
+    addAllStudentChair();
+    addAllLecturerTable();
+    addAllWhiteBoard();
+    addClock();
+    addDoor();
+    addAllWindow();
+    addLecturerChair();
+    addAllScreen();
+    addAllProjector();
+    addAllAC();
+    addAllLamp();
 }
-
-
+startDesign();
 
 /** RECEIVING INPUT FROM INTERFACE */
 function getPanjangValue() {

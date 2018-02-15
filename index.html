@@ -14,17 +14,6 @@
         </style>
 	</head>
 	<body>
-        
-        <div id="start-modal" class="modal">
-            <div class="modal-content">
-                <div class="title">
-                    <h3><b>Bagaimana Anda ingin memulai desain kelas ini?</b></h3>
-                </div>
-                <br />
-                <button onclick="startDesign('scracth')"> <b>Mulai dari awal</b> </button> <br /> <br />
-                <button onclick="startDesign('91room')"> <b>Menggunakan model kelas 09120</b> </button>
-            </div>
-        </div>
 
         <div class="menu">
             <div class="title"><h3>Aplikasi Pratinjau 3 Dimensi Berbasis Web</h3></div>
@@ -47,87 +36,7 @@
 
             <br />
 
-            <div id="menu-scratch">
-                <p><b>Ukuran kelas</b></p>
-                <div class="submenu">
-                    <div>
-                        <div class="inline">
-                            <p>Panjang :</p>
-                        </div>
-                        <div class="inline">
-                            <select id="panjang" onchange="getPanjangValue()">
-                                <option value="2">2 meter</option>
-                                <option value="3">3 meter</option>
-                                <option value="4">4 meter</option>
-                                <option value="5">5 meter</option>
-                                <option value="6">6 meter</option>
-                                <option value="7">7 meter</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="inline">
-                            <p>Lebar :</p>
-                        </div>
-                        <div class="inline">
-                            <select id="lebar" onchange="getLebarValue()">
-                                <option value="2">2 meter</option>
-                                <option value="3">3 meter</option>
-                                <option value="4">4 meter</option>
-                                <option value="5">5 meter</option>
-                                <option value="6">6 meter</option>
-                                <option value="7">7 meter</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <p><b>Warna dinding</b></p>
-                <div class="submenu">
-                    <img src="img/texturedinding1.jpg" class="img-thumbnails" id="awall1" onclick="thumbnailClicked('awall1')"/>
-                    <img src="img/texturedinding2.jpg" class="img-thumbnails" id="awall2" onclick="thumbnailClicked('awall2')"/>
-                    <img src="img/texturedinding3.jpg" class="img-thumbnails" id="awall3" onclick="thumbnailClicked('awall3')"/>
-                    <img src="img/texturedinding4.jpg" class="img-thumbnails" id="awall4" onclick="thumbnailClicked('awall4')"/>
-                    <br />
-                    <img src="img/texturedinding5.jpg" class="img-thumbnails" id="awall5" onclick="thumbnailClicked('awall5')"/>
-                    <img src="img/texturedinding6.jpg" class="img-thumbnails" id="awall6" onclick="thumbnailClicked('awall6')"/>
-                    <img src="img/texturedinding7.jpg" class="img-thumbnails" id="awall7" onclick="thumbnailClicked('awall7')"/>
-                    <img src="img/texturedinding8.jpg" class="img-thumbnails" id="awall8" onclick="thumbnailClicked('awall8')"/>
-                </div>
-
-                <p><b>Warna lantai</b></p>
-                <div class="submenu">
-                    <img src="img/texturelantai1.jpg" class="img-thumbnails" id="btile1" onclick="thumbnailClicked('btile1')"/>
-                    <img src="img/texturelantai2.jpg" class="img-thumbnails" id="btile2" onclick="thumbnailClicked('btile2')"/>
-                    <img src="img/texturelantai3.jpg" class="img-thumbnails" id="btile3" onclick="thumbnailClicked('btile3')"/>
-                    <img src="img/texturelantai4.jpg" class="img-thumbnails" id="btile4" onclick="thumbnailClicked('btile4')"/>
-                    <br />
-                    <img src="img/texturelantai5.jpg" class="img-thumbnails" id="btile5" onclick="thumbnailClicked('btile5')"/>
-                    <img src="img/texturelantai6.jpg" class="img-thumbnails" id="btile6" onclick="thumbnailClicked('btile6')"/>
-                    <img src="img/texturelantai7.jpg" class="img-thumbnails" id="btile7" onclick="thumbnailClicked('btile7')"/>
-                    <img src="img/texturelantai8.jpg" class="img-thumbnails" id="btile8" onclick="thumbnailClicked('btile8')"/>
-                </div>
-
-                <p><b>Properti kelas</b></p>
-                <div class="submenu">
-                    <img src="img/studentchair.jpg" class="prop-thumbnails" id="cprop1" onclick="thumbnailClicked('cprop1')"/>
-                    <img src="img/lecturerchair.jpg" class="prop-thumbnails" id="cprop2" onclick="thumbnailClicked('cprop2')"/>
-                    <br />
-                    <img src="img/lecturertable.jpg" class="prop-thumbnails" id="cprop3" onclick="thumbnailClicked('cprop3')"/>
-                    <img src="img/proyektor.jpg" class="prop-thumbnails" id="cprop4" onclick="thumbnailClicked('cprop4')"/>
-                    <br />
-                    <img src="img/clock.jpg" class="prop-thumbnails" id="cprop5" onclick="thumbnailClicked('cprop5')"/>
-                    <img src="img/ac.jpg" class="prop-thumbnails" id="cprop6" onclick="thumbnailClicked('cprop6')"/>
-                    <br />
-                    <img src="img/door.jpg" class="prop-thumbnails" id="cprop7" onclick="thumbnailClicked('cprop7')"/>
-                    <img src="img/window.jpg" class="prop-thumbnails" id="cprop8" onclick="thumbnailClicked('cprop8')"/>
-                    <br />
-                    <img src="img/screen.jpg" class="prop-thumbnails" id="cprop7" onclick="thumbnailClicked('cprop9')"/>
-                    <img src="img/whiteboard.jpg" class="prop-thumbnails" id="cprop8" onclick="thumbnailClicked('cprop0')"/>
-                </div>
-            </div>
-
-            <div id="menu-91room">
+            <div id="menu">
                 <p><b>Warna dinding</b></p>
                 <div class="submenu">
                     <img src="img/texturedinding1.jpg" class="img-thumbnails" id="dwall1" onclick="thumbnailClicked('dwall1')"/>
