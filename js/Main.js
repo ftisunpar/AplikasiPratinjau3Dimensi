@@ -1,17 +1,24 @@
+/** IMPORT JSON */
+var theNewScript = document.createElement("script");
+theNewScript.type = "text/javascript";
+theNewScript.src = "data.json";
+console.log(constant)
+
 /** SCENE */
 //what you viewing, where you had objects in, what you interact with
 var scene = new THREE.Scene();
 
 //set the world's color to white
-scene.background = new THREE.Color(0xa9d9ef);
+scene.background = new THREE.Color(constant.worldColor);
 
 
 
 /** CAMERA */
 //user see the world through this
 //params: vertical field of view (how much you see), ratio of browser, near plane, far plane.
-var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
-camera.position.set(0, 10, 40);
+var cameraConstant = constant.camera
+var camera = new THREE.PerspectiveCamera(cameraConstant.init.verticalField, window.innerWidth / window.innerHeight, cameraConstant.init.nearPlane, cameraConstant.init.farPlane, 100);
+camera.position.set(cameraConstant.position.x, cameraConstant.position.y, cameraConstant.position.z);
 
 
 
@@ -41,18 +48,18 @@ window.addEventListener('resize', function() {
 //making control of the camera
 controls = new THREE.OrbitControls(camera, renderer.domElement);
 //initialize camera zoom
-controls.minDistance = 15;
-controls.maxDistance = 42;
-
+var controlConstant = constant.control
+controls.minDistance = controlConstant.minZoom;
+controls.maxDistance = controlConstant.maxZoom;
 
 
 /** LIGHT */
 //add lighting
-var light1 = new THREE.AmbientLight(0xffffff, 0.5);
-scene.add(light1);
+// var light1 = new THREE.AmbientLight(0xffffff, 0.5);
+// scene.add(light1);
 
-var ambientLight =  new THREE.AmbientLight(0xFFFFFF, 0.8);
-scene.add(ambientLight);
+// var ambientLight =  new THREE.AmbientLight(0xFFFFFF, 0.8);
+// scene.add(ambientLight);
 
 
 
@@ -61,9 +68,10 @@ scene.add(ambientLight);
 function addAllStudentChair() {
     //sisi kanan
     //kursi pertama ada di tengah, loopingnya ke kanan
+    var studentChairConstant = constant.classProperties.studentChair
     var i,j,k,l,x=1.5,z=0; // x = 1.5 karena gamau mulai dari tengah 
-    for(i=0 ; i<7 ; i++) {
-        for(j=0 ; j<4 ; j++) {
+    for(i=0 ; i<studentChairConstant.rightSideQuantity ; i++) {
+        for(j=0 ; j<studentChairConstant.rightRowQuantity ; j++) {
             addStudentChair(x,z);
             z+=3.5;
         }
@@ -74,8 +82,8 @@ function addAllStudentChair() {
     //sisi kiri
     //kursi pertama ada di kiri, looping ke kiri
     x = -4.5; // gap antara kursi-kursi di sisi kanan dan kiri
-    for(i=0 ; i<6 ; i++) {
-        for(j=0 ; j<4 ; j++) {
+    for(i=0 ; i<studentChairConstant.leftSideQuantity ; i++) {
+        for(j=0 ; j<studentChairConstant.leftRowQuantity ; j++) {
             addStudentChair(x,z);
             z+=3.5;
         }
@@ -87,7 +95,7 @@ function addAllStudentChair() {
     //kursi pertama ada di pojok kanan belakang
     x = 19.5;
     z = 14;
-    for(j=0 ; j<14 ; j++) {
+    for(j=0 ; j<studentChairConstant.lastRowQuantity ; j++) {
         addStudentChair(x,z);
         x-=3;
     }
@@ -95,7 +103,8 @@ function addAllStudentChair() {
 
 function addAllWhiteBoard() {
     var i,x=-6;
-    for(i=0 ; i<2 ; i++) {
+    var whiteBoardConstant = constant.classProperties.whiteBoard
+    for(i=0 ; i<whiteBoardConstant.quantity ; i++) {
         addWhiteBoard(x);
         x+=12.3;
     }
@@ -103,7 +112,8 @@ function addAllWhiteBoard() {
 
 function addAllWindow() {
     var i,x = 19.5;
-    for(i=0 ; i<14 ; i++) {
+    var windowConstant = constant.classProperties.window
+    for(i=0 ; i<windowConstant.quantity ; i++) {
         addWindow(x);
         x-=3;
     }
@@ -111,7 +121,8 @@ function addAllWindow() {
 
 function addAllLecturerTable() {
     var i,x = 8;
-    for(i=0 ; i<2 ; i++) {
+    var lecturerTableConstant = constant.classProperties.lecturerTable
+    for(i=0 ; i<lecturerTableConstant.quantity ; i++) {
         addLecturerTable(x);
         x+=6;
     }
@@ -119,7 +130,8 @@ function addAllLecturerTable() {
 
 function addAllScreen() {
     var i,x = -8;
-    for(i=0 ; i<2 ; i++) {
+    var screenConstant = constant.classProperties.screen
+    for(i=0 ; i<screenConstant.quantity ; i++) {
         addScreen(x);
         x+=13;
     }
@@ -127,7 +139,8 @@ function addAllScreen() {
 
 function addAllProjector() {
     var i,x = -4;
-    for(i=0 ; i<2 ; i++) {
+    var projectorConstant = constant.classProperties.projector
+    for(i=0 ; i<projectorConstant.quantity ; i++) {
         addProjector(x);
         x+=13;
     }
@@ -135,7 +148,8 @@ function addAllProjector() {
 
 function addAllAC() {
     var i,x = -15;
-    for(i=0 ; i<3 ; i++) {
+    var acConstant = constant.classProperties.ac
+    for(i=0 ; i<acConstant.quantity ; i++) {
         addAC(x);
         x+=15;
     }
@@ -145,8 +159,9 @@ function addAllLamp() {
     //lampu tengah ke belakang
     //lampu pertama ada di kiri, loopingnya ke kanan
     var i,j,k,l,x=-13,z=-5;
-    for(i=0 ; i<3 ; i++) {
-        for(j=0 ; j<3 ; j++) {
+    var lampConstant = constant.classProperties.lamp
+    for(i=0 ; i<lampConstant.sideQuantity ; i++) {
+        for(j=0 ; j<lampConstant.rowQuantity ; j++) {
             addLamp(x,z,(Math.PI));
             z+=8;
         }
@@ -158,43 +173,45 @@ function addAllLamp() {
     //kursi pertama ada di pojok kiri depan
     x = -14;
     z = -10;
-    for(j=0 ; j<3 ; j++) {
+    for(j=0 ; j<lampConstant.frontQuantity ; j++) {
         addLamp(x,z,Math.PI/2);
         x+=13;
     }
 }
 
 function addStudentChair(x,z) {
+    var studentChair = constant.classProperties.studentChair
     var loader = new THREE.JSONLoader();
     var callbackKursiMahasiswa = function( geometry ) {
-        var texture = new THREE.TextureLoader().load( "models/texturekursimahasiswa.jpg" );
+        var texture = new THREE.TextureLoader().load(studentChair.texture);
         var material = new THREE.MeshBasicMaterial( { map : texture } ); 
         var mesh = new THREE.Mesh( geometry, material );
         mesh.position.set(x,4,z);
         scene.add( mesh );
     };
-    loader.load( "models/kursimahasiswa.json", callbackKursiMahasiswa);
+    loader.load(studentChair.model, callbackKursiMahasiswa);
 }
 
 function addLecturerTable(x) {
+    var lecturerTable = constant.classProperties.lecturerTable
     var loader = new THREE.JSONLoader();
     var callbackMejaDosen = function( geometry ) {
-        var texture = new THREE.TextureLoader().load( "models/texturemejadosen.jpg" );
+        var texture = new THREE.TextureLoader().load(lecturerTable.texture);
         var material = new THREE.MeshBasicMaterial( { map: texture } ); 
         var mesh = new THREE.Mesh( geometry, material );
-        mesh.name = 'lecturerTable';
         mesh.position.set(x,4.7,-8)
         mesh.rotation.y = (Math.PI/2) + (Math.PI);
         mesh.scale.set(2,2,2);
         scene.add( mesh );
     };
-    loader.load( "models/mejadosen.json", callbackMejaDosen);
+    loader.load(lecturerTable.model, callbackMejaDosen);
 }
 
 function addWhiteBoard(x) {
     var loader = new THREE.JSONLoader();
+    var whiteBoard = constant.classProperties.whiteBoard
     var callbackWhiteBoard = function( geometry ) {
-        var texture = new THREE.TextureLoader().load( "models/texturepapantulis.jpg" );
+        var texture = new THREE.TextureLoader().load(whiteBoard.texture);
         var material = new THREE.MeshBasicMaterial( { map : texture } ); 
         var mesh = new THREE.Mesh( geometry, material );
         mesh.name = 'board';
@@ -202,39 +219,42 @@ function addWhiteBoard(x) {
         mesh.scale.set(3.5,3.5,3.5);
         scene.add( mesh );
         };
-    loader.load( "models/papantulis.json", callbackWhiteBoard);
+    loader.load(whiteBoard.model, callbackWhiteBoard);
 }
 
 function addClock() {
     var loader = new THREE.JSONLoader();
+    var clock = constant.classProperties.clock
     var callbackClock = function( geometry ) {
-        var texture = new THREE.TextureLoader().load( "models/texturejamdinding.jpg" );
+        var texture = new THREE.TextureLoader().load(clock.texture);
         var material = new THREE.MeshBasicMaterial( { map : texture } ); 
         var mesh = new THREE.Mesh( geometry, material );
         mesh.name = 'clock';
         mesh.position.set(2.7,14,-15.2);
         scene.add( mesh );
         };
-    loader.load( "models/jamdinding.json", callbackClock);
+    loader.load(clock.model, callbackClock);
 }
 
 function addDoor() {
     var loader = new THREE.JSONLoader();
+    var door = constant.classProperties.door
     var callbackDoor = function( geometry ) {
-        var texture = new THREE.TextureLoader().load( "models/texturepintu.jpg" );
+        var texture = new THREE.TextureLoader().load(door.texture);
         var material = new THREE.MeshBasicMaterial( { map : texture } ); 
         var mesh = new THREE.Mesh( geometry, material );
         mesh.position.set(-13,7.5,-14.6)
         mesh.scale.set(2,2,2);
         scene.add( mesh );
         };
-    loader.load( "models/pintu.json", callbackDoor);
+    loader.load(door.model, callbackDoor);
 }
 
 function addWindow(x) {
     var loader = new THREE.JSONLoader();
+    var window = constant.classProperties.window
     var callbackWindow = function( geometry ) {
-        var texture = new THREE.TextureLoader().load( "models/texturejendela.jpg" );
+        var texture = new THREE.TextureLoader().load(window.texture);
         var material = new THREE.MeshBasicMaterial( { map : texture } ); 
         var mesh = new THREE.Mesh( geometry, material );
         mesh.position.set(x,10.2,17.1)
@@ -242,86 +262,93 @@ function addWindow(x) {
         mesh.rotation.y = Math.PI;
         scene.add( mesh );
         };
-    loader.load( "models/jendela.json", callbackWindow);
+    loader.load(window.model, callbackWindow);
 }
 
 function addLecturerChair() {
     var loader = new THREE.JSONLoader();
+    var lecturerChair = constant.classProperties.lecturerChair
     var callbackLecturerChair = function( geometry ) {
-        var texture = new THREE.TextureLoader().load( "models/texturekursidosen.jpg" );
+        var texture = new THREE.TextureLoader().load(lecturerChair.texture);
         var material = new THREE.MeshBasicMaterial( { map : texture } ); 
         var mesh = new THREE.Mesh( geometry, material );
         mesh.position.set(10,5.5,-12);
         mesh.scale.set(1.5,1.5,1.5);
         scene.add( mesh );
         };
-    loader.load( "models/kursidosen.json", callbackLecturerChair);
+    loader.load(lecturerChair.model, callbackLecturerChair);
 }
 
 function addScreen(x) {
     var loader = new THREE.JSONLoader();
+    var screen = constant.classProperties.screen
     var callbackScreen = function( geometry ) {
-        var texture = new THREE.TextureLoader().load( "models/textureacproyektorlayar.jpg" );
+        var texture = new THREE.TextureLoader().load(screen.texture);
         var material = new THREE.MeshBasicMaterial( { map : texture } ); 
         var mesh = new THREE.Mesh( geometry, material );
         mesh.position.set(x,14.5,-14.9);
         scene.add( mesh );
         };
-    loader.load( "models/layar.json", callbackScreen);
+    loader.load(screen.model, callbackScreen);
 }
 
 function addProjector(x) {
     var loader = new THREE.JSONLoader();
+    var projector = constant.classProperties.projector
     var callbackProjector = function( geometry ) {
-        var texture = new THREE.TextureLoader().load( "models/textureacproyektorlayar.jpg" );
+        var texture = new THREE.TextureLoader().load(projector.texture);
         var material = new THREE.MeshBasicMaterial( { map : texture } ); 
         var mesh = new THREE.Mesh( geometry, material );
         mesh.position.set(x,14,0);
         mesh.rotation.y = Math.PI;
         scene.add( mesh );
         };
-    loader.load( "models/proyektor.json", callbackProjector);
+    loader.load(projector.model, callbackProjector);
 }
 
 function addAC(x) {
     var loader = new THREE.JSONLoader();
+    var ac = constant.classProperties.ac
     var callbackAC = function( geometry ) {
-        var texture = new THREE.TextureLoader().load( "models/textureacproyektorlayar.jpg" );
+        var texture = new THREE.TextureLoader().load(ac.texture);
         var material = new THREE.MeshBasicMaterial( { map : texture } ); 
         var mesh = new THREE.Mesh( geometry, material );
         mesh.position.set(x,13,14);
         mesh.rotation.y = Math.PI;
         scene.add( mesh );
         };
-    loader.load( "models/ac.json", callbackAC);
+    loader.load(ac.model, callbackAC);
 }
 
 function addLamp(x,z,rotation) {
     var loader = new THREE.JSONLoader();
+    var lamp = constant.classProperties.lamp
     var callbackLamp = function( geometry ) {
-        var texture = new THREE.TextureLoader().load( "models/texturelampu.jpg" );
+        var texture = new THREE.TextureLoader().load(lamp.texture);
         var material = new THREE.MeshBasicMaterial( { map : texture } ); 
         var mesh = new THREE.Mesh( geometry, material );
         mesh.position.set(x,14.9,z);
         mesh.rotation.y = rotation;
         scene.add( mesh );
         };
-    loader.load( "models/lampu.json", callbackLamp);
+    loader.load(lamp.model, callbackLamp);
 }
 
 //room's attribute
+var texture = constant.room.texture
 var cubeMaterials = [
-    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding8.jpg'), side: THREE.BackSide }),
-    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding8.jpg'), side: THREE.BackSide }),
-    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/textureatap.jpg'), side: THREE.BackSide }),
-    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturelantai8.jpg'), side: THREE.DoubleSide }),
-    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding8.jpg'), side: THREE.BackSide }),
-    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding8.jpg'), side: THREE.BackSide })
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(texture.wall[7]), side: THREE.BackSide }),
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(texture.wall[7]), side: THREE.BackSide }),
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(texture.ceiling), side: THREE.BackSide }),
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(texture.floor[7]), side: THREE.DoubleSide }),
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(texture.wall[7]), side: THREE.BackSide }),
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(texture.wall[7]), side: THREE.BackSide })
 ]
 
-var length = 43;
-var width = 12;
-var height = 31;
+var size = constant.room.size
+var length = size.length;
+var width = size.width;
+var height = size.height;
 
 
 function createRoom() {
@@ -470,19 +497,24 @@ function printPage() {
 //view the room from inside and outside
 //++++++++++++++++++++++++++++++++++
 function changeViewMode(mode) {
+    var view = constant.view
     if(mode=='inside') {
-        createRoom(undefined, 1);
+        createRoom();
 
-        camera.position.set(0, 10, 0);
-        controls.minDistance = 5;
-        controls.maxDistance = 15;
+        var inside = view.inside
+        camera.position.set(inside.cameraPosition.x, inside.cameraPosition.y, inside.cameraPosition.z);
+        controls.minDistance = inside.control.minZoom;
+        controls.maxDistance = inside.control.maxZoom;
 
-        controls.target = new THREE.Vector3(0, 10, 0);
+        controls.target = new THREE.Vector3(inside.target.x, inside.target.y, inside.target.z);
     } else {
         createRoom();
 
-        camera.position.set(0, 10, 40);
-        controls.minDistance = 10;
-        controls.maxDistance = 42;
+        var outside = view.outside
+        camera.position.set(outside.cameraPosition.x, outside.cameraPosition.y, outside.cameraPosition.z);
+        controls.minDistance = outside.control.minZoom;
+        controls.maxDistance = outside.control.maxZoom;
+
+        controls.target = new THREE.Vector3(outside.target.x, outside.target.y, outside.target.z);
     }
 }
