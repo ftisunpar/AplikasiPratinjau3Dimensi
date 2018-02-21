@@ -14,7 +14,7 @@ var constant = {
         },
         "control": {
             "minZoom": 15,
-            "maxZoom": 42,
+            "maxZoom": 42
         },
         "classProperties": {
             "studentChair": {

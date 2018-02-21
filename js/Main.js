@@ -1,8 +1,32 @@
-/** IMPORT JSON */
+/** READ LOCAL JSON */
 var theNewScript = document.createElement("script");
 theNewScript.type = "text/javascript";
 theNewScript.src = "data.json";
 console.log(constant)
+
+/** IMPORT JSON (UPLOAD) */
+// var result = "";
+// document.getElementById('import').onclick = function() {
+//     var files = document.getElementById('selectFiles').files;
+// //   console.log(files);
+//   if (files.length <= 0) {
+//     return false;
+//   }
+
+//   var fr = new FileReader();
+
+//   fr.onload = function(e) { 
+//     result = JSON.parse(e.target.result);
+//     constant = result;
+//     // var formatted = JSON.stringify(e.target.result, null, 2);
+//     document.getElementById('result').value = result;
+//   }
+
+//   fr.readAsText(files.item(0));
+
+
+// };
+
 
 /** SCENE */
 //what you viewing, where you had objects in, what you interact with

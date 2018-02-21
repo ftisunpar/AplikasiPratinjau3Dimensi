@@ -1,0 +1,143 @@
+{
+    "worldColor": "0x000000",
+    "camera": {
+        "init": {
+            "verticalField": 75,
+            "nearPlane": 0.1,
+            "farPlane": 100
+        },
+        "position": {
+            "x": 0,
+            "y": 10,
+            "z": 40
+        }
+    },
+    "control": {
+        "minZoom": 15,
+        "maxZoom": 42
+    },
+    "classProperties": {
+        "studentChair": {
+            "rightSideQuantity": 7,
+            "rightRowQuantity": 4,
+            "leftSideQuantity": 6,
+            "leftRowQuantity": 4,
+            "lastRowQuantity": 14,
+            "texture": "models/texturekursimahasiswa.jpg",
+            "model": "models/kursimahasiswa.json"
+        },
+        "whiteBoard": {
+            "quantity": 2,
+            "texture": "models/texturepapantulis.jpg",
+            "model": "models/papantulis.json"
+        },
+        "window": {
+            "quantity": 14,
+            "texture": "models/texturejendela.jpg",
+            "model": "models/jendela.json"
+        },
+        "lecturerTable": {
+            "quantity": 2,
+            "texture": "models/texturemejadosen.jpg",
+            "model": "models/mejadosen.json"
+        },
+        "screen": {
+            "quantity": 2,
+            "texture": "models/textureacproyektorlayar.jpg",
+            "model": "models/layar.json"
+        },
+        "projector": {
+            "quantity": 2,
+            "texture": "models/textureacproyektorlayar.jpg",
+            "model": "models/proyektor.json"
+        },
+        "ac": {
+            "quantity": 3,
+            "texture": "models/textureacproyektorlayar.jpg",
+            "model": "models/ac.json"
+        },
+        "lamp": {
+            "sideQuantity": 3,
+            "rowQuantity": 3,
+            "frontQuantity": 3,
+            "texture": "models/texturelampu.jpg",
+            "model": "models/lampu.json"
+        },
+        "clock": {
+            "texture": "models/texturejamdinding.jpg",
+            "model":  "models/jamdinding.json"
+        },
+        "door": {
+            "texture": "models/texturepintu.jpg",
+            "model": "models/pintu.json"
+        },
+        "lecturerChair": {
+            "texture": "models/texturekursidosen.jpg",
+            "model": "models/kursidosen.json"
+        }
+    },
+    "room": {
+        "texture": {
+            "wall": [
+                "img/texturedinding1.jpg",
+                "img/texturedinding2.jpg",
+                "img/texturedinding3.jpg",
+                "img/texturedinding4.jpg",
+                "img/texturedinding5.jpg",
+                "img/texturedinding6.jpg",
+                "img/texturedinding7.jpg",
+                "img/texturedinding8.jpg"
+            ],
+            "floor": [
+                "img/texturelantai1.jpg",
+                "img/texturelantai2.jpg",
+                "img/texturelantai3.jpg",
+                "img/texturelantai4.jpg",
+                "img/texturelantai5.jpg",
+                "img/texturelantai6.jpg",
+                "img/texturelantai7.jpg",
+                "img/texturelantai8.jpg"
+            ],
+            "ceiling": "img/textureatap.jpg"
+        },
+        "size": {
+            "length": 43,
+            "width": 12,
+            "height": 31
+        }
+    },
+    "view": {
+        "inside": {
+            "cameraPosition": {
+                "x": 0,
+                "y": 10,
+                "z": 0
+            },
+            "control": {
+                "minZoom": 5,
+                "maxZoom": 15
+            },
+            "target": {
+                "x": 0,
+                "y": 10,
+                "z": 0
+            }
+        },
+        "outside": {
+            "cameraPosition": {
+                "x": 0,
+                "y": 10,
+                "z": 40
+            },
+            "control": {
+                "minZoom": 10,
+                "maxZoom": 42
+            },
+            "target": {
+                "x": 0,
+                "y": 10,
+                "z": 0
+            }
+        }
+    } 
+}
