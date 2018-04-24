@@ -1,81 +1,153 @@
 var constant = {
         "worldColor": 0xa9d9ef,
-        "camera": {
-            "init": {
-                "verticalField": 75,
-                "nearPlane": 0.1,
-                "farPlane": 100
-            },
-            "position": {
-                "x": 0,
-                "y": 10,
-                "z": 40
-            }
-        },
         "control": {
             "minZoom": 15,
             "maxZoom": 42
         },
-        "classProperties": {
-            "studentChair": {
-                "rightSideQuantity": 7,
-                "rightRowQuantity": 4,
-                "leftSideQuantity": 6,
-                "leftRowQuantity": 4,
-                "lastRowQuantity": 14,
-                "texture": "models/texturekursimahasiswa.jpg",
-                "model": "models/kursimahasiswa.json"
-            },
-            "whiteBoard": {
-                "quantity": 2,
-                "texture": "models/texturepapantulis.jpg",
-                "model": "models/papantulis.json"
-            },
-            "window": {
-                "quantity": 14,
-                "texture": "models/texturejendela.jpg",
-                "model": "models/jendela.json"
-            },
-            "lecturerTable": {
-                "quantity": 2,
-                "texture": "models/texturemejadosen.jpg",
-                "model": "models/mejadosen.json"
-            },
-            "screen": {
-                "quantity": 2,
-                "texture": "models/textureacproyektorlayar.jpg",
-                "model": "models/layar.json"
-            },
-            "projector": {
-                "quantity": 2,
-                "texture": "models/textureacproyektorlayar.jpg",
-                "model": "models/proyektor.json"
-            },
-            "ac": {
-                "quantity": 3,
-                "texture": "models/textureacproyektorlayar.jpg",
-                "model": "models/ac.json"
-            },
-            "lamp": {
-                "sideQuantity": 3,
-                "rowQuantity": 3,
-                "frontQuantity": 3,
-                "texture": "models/texturelampu.jpg",
-                "model": "models/lampu.json"
-            },
-            "clock": {
-                "texture": "models/texturejamdinding.jpg",
-                "model":  "models/jamdinding.json"
-            },
-            "door": {
-                "texture": "models/texturepintu.jpg",
-                "model": "models/pintu.json"
-            },
-            "lecturerChair": {
-                "texture": "models/texturekursidosen.jpg",
-                "model": "models/kursidosen.json"
-            }
+        "classProperties": [
+        {
+            "dx": 19.5,
+            "dy": 4,
+            "dz": 14.2,
+            "distancex": -3,
+            "distancez": -3.5,
+            "repeatx": 6,
+            "repeaty": 5,
+            "rotation": 0,
+            "texture": "models/texturekursimahasiswa.jpg",
+            "model": "models/kursimahasiswa.json",
+            "scale": 1
+        },{
+            "dx": -4,
+            "dy": 4,
+            "dz": 14.2,
+            "distancex": -3,
+            "distancez": -3.5,
+            "repeatx": 6,
+            "repeaty": 5,
+            "rotation": 0,
+            "texture": "models/texturekursimahasiswa.jpg",
+            "model": "models/kursimahasiswa.json",
+            "scale": 1
         },
+            {
+                "dx": 19.5,
+                "dy": 10.2,
+                "dz": 17.1,
+                "distancex": -3,
+                "distancez": 0,
+                "repeatx": 14,
+                "repeaty": 1,
+                "rotation": 3.14159,
+                "texture": "models/texturejendela.jpg",
+                "model": "models/jendela.json",
+                "scale": 2
+            },
+            {
+                "dx": 8,
+                "dy": 4.7,
+                "dz": -8,
+                "distancex": 6,
+                "distancez": 0,
+                "repeatx": 2,
+                "repeaty": 1,
+                "rotation": Math.PI + (Math.PI/2),
+                "texture": "models/texturemejadosen.jpg",
+                "model": "models/mejadosen.json",
+                "scale": 2
+            },
+            {
+                "dx": -8,
+                "dy": 14.5,
+                "dz": -14.9,
+                "distancex": 13,
+                "distancez": 0,
+                "repeatx": 2,
+                "repeaty": 1,
+                "rotation": 0,
+                "texture": "models/textureacproyektorlayar.jpg",
+                "model": "models/layar.json",
+                "scale": 1
+            },
+            {
+                "dx": -4,
+                "dy": 14,
+                "dz": 0,
+                "distancex": 13,
+                "distancez": 0,
+                "repeatx": 2,
+                "repeaty": 1,
+                "rotation": Math.PI,
+                "texture": "models/textureacproyektorlayar.jpg",
+                "model": "models/proyektor.json",
+                "scale": 1
+            },
+            {
+                "dx": -15,
+                "dy": 13,
+                "dz": 14.5,
+                "distancex": 15,
+                "distancez": 0,
+                "repeatx": 3,
+                "repeaty": 1,
+                "rotation": Math.PI,
+                "texture": "models/textureacproyektorlayar.jpg",
+                "model": "models/ac.json",
+                "scale": 1
+            },
+            {
+                "dx": -13,
+                "dy": 14.9,
+                "dz": -5,
+                "distancex": 10,
+                "distancez": 10,
+                "repeatx": 3,
+                "repeaty": 2,
+                "rotation": 0,
+                "texture": "models/texturelampu.jpg",
+                "model": "models/lampu.json",
+                "scale": 1
+            },
+            {
+                "dx": 2.7,
+                "dy": 14,
+                "dz": -15.2,
+                "distancex": 0,
+                "distancez": 0,
+                "repeatx": 1,
+                "repeaty": 1,
+                "rotation": 0,
+                "texture": "models/texturejamdinding.jpg",
+                "model": "models/jamdinding.json",
+                "scale": 1
+            },
+            {
+                "dx": -13,
+                "dy": 7.5,
+                "dz": -14.6,
+                "distancex": 0,
+                "distancez": 0,
+                "repeatx": 1,
+                "repeaty": 1,
+                "rotation": 0,
+                "texture": "models/texturepintu.jpg",
+                "model": "models/pintu.json",
+                "scale": 2
+            },
+            {
+                "dx": 10,
+                "dy": 5.5,
+                "dz": -12,
+                "distancex": 0,
+                "distancez": 0,
+                "repeatx": 1,
+                "repeaty": 1,
+                "rotation": 0,
+                "texture": "models/texturekursidosen.jpg",
+                "model": "models/kursidosen.json",
+                "scale": 1.5
+            }
+        ],
         "room": {
             "texture": {
                 "wall": [
@@ -107,6 +179,22 @@ var constant = {
             }
         },
         "view": {
+            "outside": {
+                "cameraPosition": {
+                    "x": 0,
+                    "y": 10,
+                    "z": 40
+                },
+                "control": {
+                    "minZoom": 10,
+                    "maxZoom": 42
+                },
+                "target": {
+                    "x": 0,
+                    "y": 10,
+                    "z": 0
+                }
+            },
             "inside": {
                 "cameraPosition": {
                     "x": 0,
@@ -123,21 +211,10 @@ var constant = {
                     "z": 0
                 }
             },
-            "outside": {
-                "cameraPosition": {
-                    "x": 0,
-                    "y": 10,
-                    "z": 40
-                },
-                "control": {
-                    "minZoom": 10,
-                    "maxZoom": 42
-                },
-                "target": {
-                    "x": 0,
-                    "y": 10,
-                    "z": 0
-                }
+            "init": {
+                "verticalField": 75,
+                "nearPlane": 0.1,
+                "farPlane": 100
             }
         } 
     }
