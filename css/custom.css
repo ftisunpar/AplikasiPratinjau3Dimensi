@@ -77,3 +77,23 @@ button {
     text-decoration: none;
     cursor: pointer;
 }
+
+@media print {
+    .menu {
+        float: left;
+        width: 33.33%;
+    }
+
+    .model {
+        float: left;
+        width: 33.33%;
+    }
+    
+    /* Clear floats after the columns */
+    .bigcontainer:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+

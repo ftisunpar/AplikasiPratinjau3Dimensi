@@ -1,7 +1,7 @@
 /** READ LOCAL JSON */
 var theNewScript = document.createElement("script");
 theNewScript.type = "text/javascript";
-theNewScript.src = "data.json";
+theNewScript.src = "modeKuliah.json";
 console.log(constant)
 
 
@@ -10,12 +10,13 @@ function onChange(event) {
     var reader = new FileReader();
     reader.onload = onReaderLoad;
     reader.readAsText(event.target.files[0]);
+    
 }
 
 function onReaderLoad(event){
-    console.log(event.target.result);
+    // console.log(event.target.result);
     var obj = JSON.parse(event.target.result);
-    console.log(obj.worldColor)
+    // console.log(obj.worldColor)
     loadJSON(obj);
 }
 
@@ -23,8 +24,13 @@ document.getElementById('file').addEventListener('change', onChange);
 
 
 var cubeMaterials;
+var camera;
+var constant;
 
 function loadJSON(constant) {
+    this.constant = constant;
+    console.log(constant);
+
     /** SCENE */
     //what you viewing, where you had objects in, what you interact with
     var scene = new THREE.Scene();
@@ -38,7 +44,7 @@ function loadJSON(constant) {
     //user see the world through this
     //params: vertical field of view (how much you see), ratio of browser, near plane, far plane.
     var viewConstant = constant.view
-    var camera = new THREE.PerspectiveCamera(viewConstant.init.verticalField, window.innerWidth / window.innerHeight, viewConstant.init.nearPlane, viewConstant.init.farPlane, 100);
+    camera = new THREE.PerspectiveCamera(viewConstant.init.verticalField, window.innerWidth / window.innerHeight, viewConstant.init.nearPlane, viewConstant.init.farPlane);
     camera.position.set(viewConstant.outside.cameraPosition.x, viewConstant.outside.cameraPosition.y, viewConstant.outside.cameraPosition.z);
 
     /** RENDERER */
@@ -82,13 +88,10 @@ function loadJSON(constant) {
             var dz = property.dz;
             var distancex = property.distancex;
             var distancez = property.distancez;
-            for(a=0 ; a<property.repeaty ; a++) {
+            for(a=0 ; a<property.repeatz ; a++) {
                 for(b=0 ; b<property.repeatx ; b++) {
                     addPropertyToScene(property, dx, dy, dz);
                     dx = dx + distancex;
-                    if(property.repeaty==3) {
-                        console.log(property.model, dz);
-                    }
                 }
                 dx = property.dx;
                 dz = dz + distancez;
@@ -143,13 +146,6 @@ function loadJSON(constant) {
         cube.position.y = 9.05;
         cube.name = 'room';
         scene.add(cube);
-
-        // var geometry = new THREE.PlaneBufferGeometry( length, width/2 );
-        // var material = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
-        // var plane = new THREE.Mesh( geometry, material );
-        // plane.position.y = 9.05/2;
-        // plane.position.z = height/2;
-        // scene.add( plane );
     }
 
     
@@ -173,6 +169,37 @@ function loadJSON(constant) {
         createRoom();
     }
 
+    var wallDiv = document.getElementById('wallTextures');
+    while(wallDiv.firstChild) {
+        wallDiv.removeChild(wallDiv.firstChild);
+    }
+
+    var floorDiv = document.getElementById('floorTextures');
+    while(floorDiv.firstChild) {
+        floorDiv.removeChild(floorDiv.firstChild);
+    }
+
+    var wallTextureArr = constant.room.texture.wall;
+    console.log("length wall ", wallTextureArr.length);
+    for (i = 0; i < wallTextureArr.length; i++) { 
+        var x = document.createElement("IMG");
+        var id = "dwall" + i;
+        x.setAttribute("src", wallTextureArr[i]);
+        x.setAttribute("class", "img-thumbnails");
+        x.setAttribute("id", id);
+        document.getElementById('wallTextures').appendChild(x);
+    }
+
+    var floorTextureArr = constant.room.texture.floor;
+    console.log("length florr ", floorTextureArr.length);
+    for (i = 0; i < floorTextureArr.length; i++) { 
+        var x = document.createElement("IMG");
+        var id = "ewall" + i;
+        x.setAttribute("src", floorTextureArr[i]);
+        x.setAttribute("class", "img-thumbnails");
+        x.setAttribute("id", id);
+        document.getElementById('floorTextures').appendChild(x);
+    }
 
 
     /** MAIN */
@@ -200,6 +227,7 @@ function loadJSON(constant) {
 
 loadJSON(constant);
 
+    
 
 
 /** LIGHT */
@@ -231,10 +259,15 @@ function changeMaterial(id) {
 //change the wall color
 //++++++++++++++++++++++++++++
 function setWallColor(number) {
-    cubeMaterials[0] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding' + number + '.jpg'), side: THREE.BackSide });
-    cubeMaterials[1] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding' + number + '.jpg'), side: THREE.BackSide });
-    cubeMaterials[4] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding' + number + '.jpg'), side: THREE.BackSide });
-    cubeMaterials[5] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding' + number + '.jpg'), side: THREE.BackSide });
+    number++;
+    cubeMaterials[0] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding'
+    + number + '.jpg'), side: THREE.BackSide });
+    cubeMaterials[1] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding'
+    + number + '.jpg'), side: THREE.BackSide });
+    cubeMaterials[4] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding'
+    + number + '.jpg'), side: THREE.BackSide });
+    cubeMaterials[5] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding'
+    + number + '.jpg'), side: THREE.BackSide });
     // createRoom();
 }
 
@@ -243,31 +276,25 @@ function setWallColor(number) {
 //change the tile color
 //+++++++++++++++++++++++++++++
 function setTileColor(number) {
-    cubeMaterials[3] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturelantai' + number +'.jpg'), side: THREE.DoubleSide });
+    number++;
+    cubeMaterials[3] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturelantai' 
+    + number +'.jpg'), side: THREE.DoubleSide });
     // createRoom();
 }
 
-/** RECEIVING INPUT FROM INTERFACE */
-function thumbnailClicked(id) {
-    for(i=1 ; i<=8 ; i++) {
-        if(id.charAt(0) == 'a') {
-            var removeId = 'awall' + i;
-        } else if (id.charAt(0) == 'b') {
-            var removeId = 'btile' + i;
-        } else if(id.charAt(0) == 'c') {
-            var removeId = 'cprop' + i;
-        } else if(id.charAt(0) == 'd') {
-            var removeId = 'dwall' + i;
-        } else {
-            var removeId = 'etile' + i;
-        }
-        document.getElementById(removeId).style.border = "none";
-    }
-    document.getElementById(id).style.border = "3px solid";
-    console.log(id);
 
-    changeMaterial(id);
-}
+document.getElementById("wallTextures").addEventListener("click", function(e) {
+    if(e.target && e.target.nodeName == "IMG") {
+        thumbnailClicked(e.target.id);
+    }
+})
+
+
+document.getElementById("floorTextures").addEventListener("click", function(e) {
+    if(e.target && e.target.nodeName == "IMG") {
+        thumbnailClicked(e.target.id);
+    }
+})
 
 
 
@@ -293,7 +320,6 @@ function printPage() {
 function changeViewMode(mode) {
     var view = constant.view
     if(mode=='inside') {
-        createRoom();
 
         var inside = view.inside
         camera.position.set(inside.cameraPosition.x, inside.cameraPosition.y, inside.cameraPosition.z);
@@ -302,7 +328,6 @@ function changeViewMode(mode) {
 
         controls.target = new THREE.Vector3(inside.target.x, inside.target.y, inside.target.z);
     } else {
-        createRoom();
 
         var outside = view.outside
         camera.position.set(outside.cameraPosition.x, outside.cameraPosition.y, outside.cameraPosition.z);
@@ -311,4 +336,26 @@ function changeViewMode(mode) {
 
         controls.target = new THREE.Vector3(outside.target.x, outside.target.y, outside.target.z);
     }
+}
+
+/** RECEIVING INPUT FROM INTERFACE */
+function thumbnailClicked(id) {
+    // console.log(id);
+    for(i=1 ; i<=constant.room.texture.wall.length ; i++) {
+        if(id.charAt(0) == 'a') {
+            var removeId = 'awall' + i;
+        } else if (id.charAt(0) == 'b') {
+            var removeId = 'btile' + i;
+        } else if(id.charAt(0) == 'c') {
+            var removeId = 'cprop' + i;
+        } else if(id.charAt(0) == 'd') {
+            var removeId = 'dwall' + i;
+        } else {
+            var removeId = 'etile' + i;
+        }
+        // document.getElementById(removeId).style.border = "none";
+    }
+    // document.getElementById(id).style.border = "3px solid";
+
+    changeMaterial(id);
 }
