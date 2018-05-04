@@ -26,7 +26,7 @@ document.getElementById('file').addEventListener('change', onChange);
 var cubeMaterials;
 var camera;
 var constant;
-
+var renderer;
 function loadJSON(constant) {
     this.constant = constant;
     console.log(constant);
@@ -49,9 +49,10 @@ function loadJSON(constant) {
 
     /** RENDERER */
     //make its own canvas element, because it have no params (not anymore hehe)
-    var renderer = new THREE.WebGLRenderer({canvas: document.getElementById('canvas'), antialias: true});
+    renderer = new THREE.WebGLRenderer({canvas: document.getElementById('canvas'), antialias: true});
     renderer.setSize(window.innerWidth/1.5, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+    // document.body.appendChild(renderer.domElement);
+    document.getElementById('model').appendChild(renderer.domElement);
 
     //render the scene
     var render = function() {
@@ -62,7 +63,7 @@ function loadJSON(constant) {
     window.addEventListener('resize', function() {
         var width = window.innerWidth;
         var height = window.innerHeight;
-        renderer.setSize(width, height);
+        renderer.setSize(width/1.5, height);
         camera.aspect = width/height;
         camera.updateProjectionMatrix();
     })
@@ -247,52 +248,43 @@ loadJSON(constant);
 //++++++++++++++++++++++++++++
 //the main function to change the wall and tile's color
 //++++++++++++++++++++++++++++
-function changeMaterial(id) {
+function changeMaterial(id, src) {
     if(id.charAt(0)=='a' || id.charAt(0)=='d') {
-        setWallColor(id.charAt(5));
+        setWallColor(src);
     } else if(id.charAt(0)=='e' || id.charAt(0)=='b'){
-        setTileColor(id.charAt(5));
+        setTileColor(src);
     }
 }
 
 //++++++++++++++++++++++++++++
 //change the wall color
 //++++++++++++++++++++++++++++
-function setWallColor(number) {
-    number++;
-    cubeMaterials[0] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding'
-    + number + '.jpg'), side: THREE.BackSide });
-    cubeMaterials[1] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding'
-    + number + '.jpg'), side: THREE.BackSide });
-    cubeMaterials[4] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding'
-    + number + '.jpg'), side: THREE.BackSide });
-    cubeMaterials[5] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturedinding'
-    + number + '.jpg'), side: THREE.BackSide });
-    // createRoom();
+function setWallColor(src) {
+    cubeMaterials[0] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(src), side: THREE.BackSide });
+    cubeMaterials[1] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(src), side: THREE.BackSide });
+    cubeMaterials[4] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(src), side: THREE.BackSide });
+    cubeMaterials[5] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(src), side: THREE.BackSide });
 }
 
 
 //+++++++++++++++++++++++++++++
 //change the tile color
 //+++++++++++++++++++++++++++++
-function setTileColor(number) {
-    number++;
-    cubeMaterials[3] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/texturelantai' 
-    + number +'.jpg'), side: THREE.DoubleSide });
-    // createRoom();
+function setTileColor(src) {
+    cubeMaterials[3] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(src), side: THREE.DoubleSide });
 }
 
 
 document.getElementById("wallTextures").addEventListener("click", function(e) {
     if(e.target && e.target.nodeName == "IMG") {
-        thumbnailClicked(e.target.id);
+        thumbnailClicked(e.target.id, e.target.src);
     }
 })
 
 
 document.getElementById("floorTextures").addEventListener("click", function(e) {
     if(e.target && e.target.nodeName == "IMG") {
-        thumbnailClicked(e.target.id);
+        thumbnailClicked(e.target.id, e.target.src);
     }
 })
 
@@ -310,8 +302,6 @@ btn.onclick = function () {
 function printPage() {
     window.print();
 }
-
-
 
 //++++++++++++++++++++++++++++++++++
 //VIEW THINGS
@@ -339,7 +329,7 @@ function changeViewMode(mode) {
 }
 
 /** RECEIVING INPUT FROM INTERFACE */
-function thumbnailClicked(id) {
+function thumbnailClicked(id, src) {
     // console.log(id);
     for(i=1 ; i<=constant.room.texture.wall.length ; i++) {
         if(id.charAt(0) == 'a') {
@@ -357,5 +347,5 @@ function thumbnailClicked(id) {
     }
     // document.getElementById(id).style.border = "3px solid";
 
-    changeMaterial(id);
+    changeMaterial(id, src);
 }
