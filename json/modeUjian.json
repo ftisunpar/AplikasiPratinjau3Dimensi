@@ -45,19 +45,6 @@
             "scale": 2
         },
         {
-            "dx": 8,
-            "dy": 4.7,
-            "dz": -8,
-            "distancex": 6,
-            "distancez": 0,
-            "repeatx": 2,
-            "repeatz": 1,
-            "rotation": 4.712385,
-            "texture": "models/texturemejadosen.jpg",
-            "model": "models/mejadosen.json",
-            "scale": 2
-        },
-        {
             "dx": -8,
             "dy": 14.5,
             "dz": -14.9,
@@ -134,19 +121,6 @@
             "texture": "models/texturepintu.jpg",
             "model": "models/pintu.json",
             "scale": 2
-        },
-        {
-            "dx": 10,
-            "dy": 5.5,
-            "dz": -12,
-            "distancex": 0,
-            "distancez": 0,
-            "repeatx": 1,
-            "repeatz": 1,
-            "rotation": 0,
-            "texture": "models/texturekursidosen.jpg",
-            "model": "models/kursidosen.json",
-            "scale": 1.5
         }
     ],
     "room": {
@@ -168,7 +142,8 @@
                 "img/texturelantai4.jpg",
                 "img/texturelantai5.jpg",
                 "img/texturelantai6.jpg",
-                "img/texturelantai7.jpg"
+                "img/texturelantai7.jpg",
+                "img/texturelantai8.jpg"
             ],
             "ceiling": "img/textureatap.jpg"
         },

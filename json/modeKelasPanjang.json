@@ -1,0 +1,208 @@
+{
+    "worldColor": 11131375,
+    "control": {
+        "minZoom": 15,
+        "maxZoom": 42
+    },
+    "classProperties": [
+    {
+        "dx": 7.2,
+        "dy": 4,
+        "dz": 23.7,
+        "distancex": -3,
+        "distancez": -3.5,
+        "repeatx": 5,
+        "repeatz": 8,
+        "rotation": 0,
+        "texture": "models/texturekursimahasiswa.jpg",
+        "model": "models/kursimahasiswa.json",
+        "scale": 1
+    },
+    {
+        "dx": -1,
+        "dy": 10,
+        "dz": -21.5,
+        "distancex": 12.3,
+        "distancez": 0,
+        "repeatx": 1,
+        "repeatz": 1,
+        "rotation": 0,
+        "texture": "models/texturepapantulis.jpg",
+        "model": "models/papantulis.json",
+        "scale": 3.5
+    },
+    {
+        "dx": 7,
+        "dy": 10.2,
+        "dz": 26.7,
+        "distancex": -3,
+        "distancez": 0,
+        "repeatx": 6,
+        "repeatz": 1,
+        "rotation": 3.14159,
+        "texture": "models/texturejendela.jpg",
+        "model": "models/jendela.json",
+        "scale": 2
+    },
+    {
+        "dx": -8,
+        "dy": 4.7,
+        "dz": -12,
+        "distancex": 6,
+        "distancez": 0,
+        "repeatx": 2,
+        "repeatz": 1,
+        "rotation": 4.712385,
+        "texture": "models/texturemejadosen.jpg",
+        "model": "models/mejadosen.json",
+        "scale": 2
+    },
+    {
+        "dx": -2,
+        "dy": 14.5,
+        "dz": -24.6,
+        "distancex": 13,
+        "distancez": 0,
+        "repeatx": 1,
+        "repeatz": 1,
+        "rotation": 0,
+        "texture": "models/textureacproyektorlayar.jpg",
+        "model": "models/layar.json",
+        "scale": 1
+    },
+    {
+        "dx": 2,
+        "dy": 14,
+        "dz": -5,
+        "distancex": 13,
+        "distancez": 0,
+        "repeatx": 1,
+        "repeatz": 1,
+        "rotation": 3.14159,
+        "texture": "models/textureacproyektorlayar.jpg",
+        "model": "models/proyektor.json",
+        "scale": 1
+    },
+    {
+        "dx": -7,
+        "dy": 13,
+        "dz": 24,
+        "distancex": 10,
+        "distancez": 0,
+        "repeatx": 2,
+        "repeatz": 1,
+        "rotation": 3.14159,
+        "texture": "models/textureacproyektorlayar.jpg",
+        "model": "models/ac.json",
+        "scale": 1
+    },
+    {
+        "dx": -8,
+        "dy": 14.9,
+        "dz": -5,
+        "distancex": 10,
+        "distancez": 10,
+        "repeatx": 2,
+        "repeatz": 3,
+        "rotation": 0,
+        "texture": "models/texturelampu.jpg",
+        "model": "models/lampu.json",
+        "scale": 1
+    },
+    {
+        "dx": 9,
+        "dy": 7.5,
+        "dz": -17.1,
+        "distancex": 0,
+        "distancez": 0,
+        "repeatx": 1,
+        "repeatz": 1,
+        "rotation": 4.712385,
+        "texture": "models/texturepintu.jpg",
+        "model": "models/pintu.json",
+        "scale": 2
+    },
+    {
+        "dx": -5,
+        "dy": 5.5,
+        "dz": -16,
+        "distancex": 0,
+        "distancez": 0,
+        "repeatx": 1,
+        "repeatz": 1,
+        "rotation": 0,
+        "texture": "models/texturekursidosen.jpg",
+        "model": "models/kursidosen.json",
+        "scale": 1.5
+    }
+],
+"room": {
+    "texture": {
+        "wall": [
+            "img/texturedinding1.jpg",
+            "img/texturedinding2.jpg",
+            "img/texturedinding3.jpg",
+            "img/texturedinding4.jpg",
+            "img/texturedinding5.jpg",
+            "img/texturedinding6.jpg",
+            "img/texturedinding7.jpg",
+            "img/texturedinding8.jpg"
+        ],
+        "floor": [
+            "img/texturelantai1.jpg",
+            "img/texturelantai2.jpg",
+            "img/texturelantai3.jpg",
+            "img/texturelantai4.jpg",
+            "img/texturelantai5.jpg",
+            "img/texturelantai6.jpg",
+            "img/texturelantai7.jpg",
+            "img/texturelantai8.jpg"
+        ],
+        "ceiling": "img/textureatap.jpg"
+    },
+    "size": {
+        "length": 20,
+        "width": 12,
+        "height": 50
+    }
+},
+"view": {
+    "outside": {
+        "cameraPosition": {
+            "x": 0,
+            "y": 10,
+            "z": 40
+        },
+        "control": {
+            "minZoom": 10,
+            "maxZoom": 42
+        },
+        "target": {
+            "x": 0,
+            "y": 10,
+            "z": 0
+        }
+    },
+    "inside": {
+        "cameraPosition": {
+            "x": 0,
+            "y": 10,
+            "z": 0
+        },
+        "control": {
+            "minZoom": 5,
+            "maxZoom": 15
+        },
+        "target": {
+            "x": 0,
+            "y": 10,
+            "z": 0
+        }
+    },
+    "init": {
+        "verticalField": 75,
+        "nearPlane": 0.1,
+        "farPlane": 100
+    }
+} 
+}

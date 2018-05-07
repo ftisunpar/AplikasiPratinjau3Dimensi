@@ -1,5 +1,5 @@
 var constant = {
-        "worldColor": 0xa9d9ef,
+        "worldColor": 11131375,
         "control": {
             "minZoom": 15,
             "maxZoom": 42
@@ -65,7 +65,7 @@ var constant = {
             "distancez": 0,
             "repeatx": 2,
             "repeatz": 1,
-            "rotation": Math.PI + (Math.PI/2),
+            "rotation": 4.712385,
             "texture": "models/texturemejadosen.jpg",
             "model": "models/mejadosen.json",
             "scale": 2
@@ -91,7 +91,7 @@ var constant = {
             "distancez": 0,
             "repeatx": 2,
             "repeatz": 1,
-            "rotation": Math.PI,
+            "rotation": 3.14159,
             "texture": "models/textureacproyektorlayar.jpg",
             "model": "models/proyektor.json",
             "scale": 1
@@ -104,7 +104,7 @@ var constant = {
             "distancez": 0,
             "repeatx": 3,
             "repeatz": 1,
-            "rotation": Math.PI,
+            "rotation": 3.14159,
             "texture": "models/textureacproyektorlayar.jpg",
             "model": "models/ac.json",
             "scale": 1
