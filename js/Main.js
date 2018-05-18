@@ -14,9 +14,7 @@ function onChange(event) {
 }
 
 function onReaderLoad(event){
-    // console.log(event.target.result);
     var obj = JSON.parse(event.target.result);
-    // console.log(obj.worldColor)
     loadJSON(obj);
 }
 
@@ -37,8 +35,6 @@ function loadJSON(constant) {
 
     //set the world's color to white
     scene.background = new THREE.Color(constant.worldColor);
-
-
 
     /** CAMERA */
     //user see the world through this
@@ -68,11 +64,10 @@ function loadJSON(constant) {
         camera.updateProjectionMatrix();
     })
 
-
-
     /** CONTROL */
     //making control of the camera
     controls = new THREE.OrbitControls(camera, renderer.domElement);
+
     //initialize camera zoom
     var controlConstant = constant.control
     controls.minDistance = controlConstant.minZoom;
@@ -149,25 +144,17 @@ function loadJSON(constant) {
         scene.add(cube);
     }
 
-    
-
-
-    //+++++++++++++++++++++++++++++
     //change the room size
-    //+++++++++++++++++++++++++++++
     function setRoomLength(length) {
         length = length;
-        createRoom();
     }
 
     function setRoomWidth(width) {
         width = width;
-        createRoom();
     }
 
     function setRoomHeight(height) {
         height = height;
-        createRoom();
     }
 
     var wallDiv = document.getElementById('wallTextures');
@@ -202,18 +189,9 @@ function loadJSON(constant) {
         document.getElementById('floorTextures').appendChild(x);
     }
 
-
-    /** MAIN */
-    //update the scene
-    var update = function(){
-        // cube.rotation.x += 0.01;
-        // cube.rotation.y += 0.005;
-    }
-
     //run all the animation (update, render, repeat )
     var main = function() {
         requestAnimationFrame(main);
-        // update();
         render ();
     }
 
@@ -228,26 +206,7 @@ function loadJSON(constant) {
 
 loadJSON(constant);
 
-    
-
-
-/** LIGHT */
-//add lighting
-// var light1 = new THREE.AmbientLight(0xffffff, 0.5);
-// scene.add(light1);
-
-// var ambientLight =  new THREE.AmbientLight(0xFFFFFF, 0.8);
-// scene.add(ambientLight);
-
-
-
-/** MODEL */
-//render model
-
-/** FEATURE */
-//++++++++++++++++++++++++++++
 //the main function to change the wall and tile's color
-//++++++++++++++++++++++++++++
 function changeMaterial(id, src) {
     if(id.charAt(0)=='a' || id.charAt(0)=='d') {
         setWallColor(src);
@@ -256,9 +215,7 @@ function changeMaterial(id, src) {
     }
 }
 
-//++++++++++++++++++++++++++++
 //change the wall color
-//++++++++++++++++++++++++++++
 function setWallColor(src) {
     cubeMaterials[0] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(src), side: THREE.BackSide });
     cubeMaterials[1] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(src), side: THREE.BackSide });
@@ -266,21 +223,19 @@ function setWallColor(src) {
     cubeMaterials[5] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(src), side: THREE.BackSide });
 }
 
-
-//+++++++++++++++++++++++++++++
 //change the tile color
-//+++++++++++++++++++++++++++++
 function setTileColor(src) {
     cubeMaterials[3] = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(src), side: THREE.DoubleSide });
 }
 
 
+/** JS FOR THE INTERFACE */
+//listener event
 document.getElementById("wallTextures").addEventListener("click", function(e) {
     if(e.target && e.target.nodeName == "IMG") {
         thumbnailClicked(e.target.id, e.target.src);
     }
 })
-
 
 document.getElementById("floorTextures").addEventListener("click", function(e) {
     if(e.target && e.target.nodeName == "IMG") {
@@ -288,9 +243,6 @@ document.getElementById("floorTextures").addEventListener("click", function(e) {
     }
 })
 
-
-
-/** JS FOR THE INTERFACE */
 //refresh page when click the 'buat ulang desain'
 //refresh the page because it will remove all of the current choice
 var btn = document.getElementById('refreshBtn');
@@ -303,10 +255,7 @@ function printPage() {
     window.print();
 }
 
-//++++++++++++++++++++++++++++++++++
-//VIEW THINGS
 //view the room from inside and outside
-//++++++++++++++++++++++++++++++++++
 function changeViewMode(mode) {
     var view = constant.view
     if(mode=='inside') {
@@ -328,7 +277,7 @@ function changeViewMode(mode) {
     }
 }
 
-/** RECEIVING INPUT FROM INTERFACE */
+// RECEIVING INPUT FROM INTERFACE
 function thumbnailClicked(id, src) {
     // console.log(id);
     for(i=1 ; i<=constant.room.texture.wall.length ; i++) {
@@ -343,19 +292,15 @@ function thumbnailClicked(id, src) {
         } else {
             var removeId = 'etile' + i;
         }
-        // document.getElementById(removeId).style.border = "none";
     }
-    // document.getElementById(id).style.border = "3px solid";
 
     changeMaterial(id, src);
 }
 
 window.addEventListener("error", handleError, true);
-
 function handleError(evt) {
     if (evt.message) { // Chrome sometimes provides this
-      alert("error: "+evt.message +" at linenumber: "+evt.lineno+" of file: "+evt.filename);
-      console.log("error: ",evt.message ," at linenumber: ",evt.lineno," of file: ",evt.filename);
+      alert("TERDAPAT KESALAHAN PADA BERKAS JSON YANG ANDA UNGGAH");
     } else {
       alert("TERDAPAT KESALAHAN PADA BERKAS JSON YANG ANDA UNGGAH PADA BAGIAN "+(evt.srcElement || evt.target));
       console.log("error: ",evt.type," from element: ",(evt.srcElement || evt.target));
